@@ -4,9 +4,9 @@
 # | (_|  __/ | |  __/ |_) | | |  __/_| | (_) |
 #  \___\___|_|  \___|_.__/|_|  \___(_)_|\___/
 #
-#Proprietary software created by CEREBRE.
-#© CEREBRE, USA. All rights reserved.
-#Visit us at: https://www.cerebre.io
+# Proprietary software created by CEREBRE.
+# © CEREBRE, USA. All rights reserved.
+# Visit us at: https://www.cerebre.io
 import os
 import re
 from pathlib import Path
