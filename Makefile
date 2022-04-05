@@ -3,9 +3,9 @@ LIBS        = $(MODULE) tests
 PYTHON      = poetry run python
 PRECOMMIT   = poetry run pre-commit
 
-FILES_DIR = data
+FILES_DIR = .
 HEADER_PATH = tests/data/header.txt
-EXTENSIONS = .py .txt .go .yaml .sh .html .c++ .cpp
+EXTENSIONS = .py .yaml
 PARALLELISM ?= 1 #NotImplemented
 
 
