@@ -1,12 +1,3 @@
-#                    _                _
-#   ___ ___ _ __ ___| |__  _ __ ___  (_) ___
-#  / __/ _ \ '__/ _ \ '_ \| '__/ _ \ | |/ _ \
-# | (_|  __/ | |  __/ |_) | | |  __/_| | (_) |
-#  \___\___|_|  \___|_.__/|_|  \___(_)_|\___/
-#
-# Proprietary software created by CEREBRE.
-# © CEREBRE, USA. All rights reserved.
-# Visit us at: https://www.cerebre.io
 import os
 import re
 from pathlib import Path
@@ -203,7 +194,9 @@ class HeaderProcedure:
             else:
                 if first_line is None:
                     first_line = i
-                if line == header_lines[correct_line_counter]:
+                if line.replace(" ", "") == header_lines[correct_line_counter].replace(
+                    " ", ""
+                ):  # TODO QUICK FIX - Make lint removes/adds spaces sometimes!
                     correct_line_counter += 1
                 else:  # lines are different
                     return None
