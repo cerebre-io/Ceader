@@ -27,9 +27,10 @@ In this folder, files will be searched recursively.
 Path to the file in .txt format with the header to be added.
 
 ##### EXTENSIONS
-Files with these extensions will be searched for in the ${FILES_DIR}. The programming language will be recognized by this information and an appropriate comment will be added. For example: \
+Files with these extensions will be searched for in the ${FILES_DIR}. \
+The programming language will be recognized by this information and an appropriate comment will be added. For example:
 ```
-EXTENSIONS = .py .yaml .txt\
+EXTENSIONS = .py .yaml .txt
 ```
 TODO add a list of working extensions
 
