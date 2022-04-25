@@ -31,7 +31,7 @@ repos:
                 '--mode', ${MODE},
                 '--files-dir', ${FILES_DIR},
                 '--header-path', ${HEADER_PATH},
-                '--extensions-list' ${EXTENSIONS},
+                '--extensions-list', ${EXTENSIONS},
                 '--']
 ```
 ##### FILES_DIR
