@@ -27,16 +27,18 @@ In this folder, files will be searched recursively.
 Path to the file in .txt format with the header to be added.
 
 ##### EXTENSIONS
-Files with these extensions will be searched for in the ${FILES_DIR}. The programming language will be recognized by this information and an appropriate comment will be added. \
-e.g: EXTENSIONS = .py .yaml .txt\
+Files with these extensions will be searched for in the ${FILES_DIR}. The programming language will be recognized by this information and an appropriate comment will be added. For example: \
+```
+EXTENSIONS = .py .yaml .txt\
+```
 TODO add a list of working extensions
 
 
 ##### MODE
 
-There are two modes at the moment:
+There are two modes at the moment:\
     - 'add_header' adds the indicated header to files, if header already exists in the file it does nothing\
-    - 'remove_header' removes the indicated header to files, but only if header exists in the file
+    - 'remove_header' removes the indicated header to files, but only if header exists in the file\
 
 
 
