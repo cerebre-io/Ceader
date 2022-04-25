@@ -6,13 +6,12 @@ setup(
     license="MIT",
     author="Kamil Jankowski",
     author_email="kamil@cerebre.io",
-    packages=find_packages("src"),
+    packages=find_packages("src", include="tests"),
     package_dir={"": "src"},
     url="https://github.com/cerebre-io/ceader",
     keywords="Header",
     install_requires=[],
     python_requiers=">=3.8",
-    py_modules=["ceader", "tests"],
 )
 
 # python setup.py sdist
