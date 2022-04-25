@@ -107,7 +107,6 @@ jobs:
 
       - name: Install Dependencies using Poetry
         run: poetry install
-        if: steps.cache.outputs.cache-hit != 'true'
 
       - name: Run pytest
         run: PYTHONPATH=src/ poetry run python -m pytest -v --cov=src/ tests/
