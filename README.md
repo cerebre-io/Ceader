@@ -32,6 +32,11 @@ The programming language will be recognized by this information and an appropria
 ```
 EXTENSIONS = .py .yaml .txt
 ```
+or in yaml format:
+
+```
+'--extensions-list', '.py', '.yaml', '.txt'
+```
 TODO add a list of working extensions
 
 
