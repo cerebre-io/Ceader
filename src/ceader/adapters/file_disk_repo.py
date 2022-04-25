@@ -1,9 +1,9 @@
 from pathlib import Path
 from typing import Dict, List, Optional, Set
 
-from src.ceader import get_logger
-from src.ceader.domain.repositories import FileRepository
-from src.ceader.domain.utils import find_file
+from ceader import get_logger
+from ceader.domain.repositories import FileRepository
+from ceader.domain.utils import find_file
 
 logger = get_logger()
 

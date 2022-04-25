@@ -1,7 +1,7 @@
 import sys
 from datetime import datetime
 
-from src.ceader.ports.cli import Cli
+from ceader.ports.cli import Cli
 
 
 # just main entry point

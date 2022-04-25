@@ -5,14 +5,14 @@ from typing import List, Optional, Tuple
 
 # fmt: off
 #Black / isort are broken here :)
-from src.ceader import get_logger
-from src.ceader.domain.knowledge.extensions_to_language import \
+from ceader import get_logger
+from ceader.domain.knowledge.extensions_to_language import \
     EXTENSION_TO_PROGRAMMING_LANGUAGE_MAPPING
-from src.ceader.domain.knowledge.language_to_comment import (
+from ceader.domain.knowledge.language_to_comment import (
     COMPUTER_LANGUAGE_TO_COMMENT_DATA_MAPPING, CommentData)
 # fmt: on
-from src.ceader.domain.types.enums import CeaderStatus, ComputerLanguage
-from src.ceader.domain.utils import get_file_lines
+from ceader.domain.types.enums import CeaderStatus, ComputerLanguage
+from ceader.domain.utils import get_file_lines
 
 logger = get_logger()
 

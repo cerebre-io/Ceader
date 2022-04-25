@@ -1,7 +1,7 @@
 import tempfile
 from pathlib import Path
 
-from src.ceader.domain.utils import get_path_dict_by_extensions
+from ceader.domain.utils import get_path_dict_by_extensions
 
 
 def test_file_with_different_extension() -> None:

@@ -6,11 +6,11 @@ from multiprocessing import Pool
 from pathlib import Path
 from typing import Callable, Dict, Iterable, Iterator, List, TypeVar
 
-from src.ceader import get_logger
-from src.ceader.domain.header_procedure import HeaderProcedure
-from src.ceader.domain.repositories import FileRepository
-from src.ceader.domain.types.enums import CeaderStatus
-from src.ceader.domain.utils import get_file_lines
+from ceader import get_logger
+from ceader.domain.header_procedure import HeaderProcedure
+from ceader.domain.repositories import FileRepository
+from ceader.domain.types.enums import CeaderStatus
+from ceader.domain.utils import get_file_lines
 
 A = TypeVar("A")
 T = TypeVar("T")
