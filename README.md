@@ -4,8 +4,9 @@ Tool for automatically adding a header to files in the form of a comment.
 Based on the file extensions, Ceader detects the programming language and selects the comment character accordingly.
 
 
-## Pre-commit
+### Pre-commit
 In order to use ceader in pre-commit add the following configuration to your .pre-commit-config.yaml:
+```
   - repo: https://github.com/cerebre-io/ceader
     rev: 0.0.1
     hooks:
@@ -16,17 +17,18 @@ In order to use ceader in pre-commit add the following configuration to your .pr
             '--header-path', ${HEADER_PATH},
             '--extensions-list' ${EXTENSIONS},
             '--']
-### FILES_DIR
+```
+##### FILES_DIR
 This is the path to the folder where the files need to be changed.
 In this folder, files will be searched recursively.
 
-### HEADER_PATH
+##### HEADER_PATH
 Path to the file in .txt format with the header to be added.
 
-### EXTENSIONS
+##### EXTENSIONS
 Files with these extensions will be searched for in the ${FILES_DIR}. The programming language will be recognized by this information and an appropriate comment will be added.
 
-### MODE
+##### MODE
 
 There are two modes at the moment:
     - 'add_header' adds the indicated header to files, if header already exists in the file it does nothing
@@ -36,7 +38,7 @@ There are two modes at the moment:
 
 
 
-## TODO
+### TODO
 
 - CI/CD
 - pypi
