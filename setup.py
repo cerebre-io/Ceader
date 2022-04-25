@@ -12,7 +12,7 @@ setup(
     keywords="Header",
     install_requires=[],
     python_requiers=">=3.8",
-    py_modules=["ceader"],
+    py_modules=["ceader", "tests"],
 )
 
 # python setup.py sdist
