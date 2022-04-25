@@ -1,8 +1,21 @@
 # Ceader
 
 Tool for automatically adding a header to files in the form of a comment.\
-Based on the file extensions, Ceader detects the programming language and selects the comment character accordingly.
+Based on the file extensions, Ceader detects the programming language and selects the comment character accordingly.\
 
+Header sample:
+```
+
+                    _                _
+   ___ ___ _ __ ___| |__  _ __ ___  (_) ___
+  / __/ _ \ '__/ _ \ '_ \| '__/ _ \ | |/ _ \
+ | (_|  __/ | |  __/ |_) | | |  __/_| | (_) |
+  \___\___|_|  \___|_.__/|_|  \___(_)_|\___/
+
+Proprietary software created by CEREBRE.
+© CEREBRE, USA. All rights reserved.
+Visit us at: https://www.cerebre.io
+```
 
 ### Pre-commit
 In order to use ceader in pre-commit add the following configuration to your .pre-commit-config.yaml:
