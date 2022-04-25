@@ -39,7 +39,6 @@ class Cli:
             header_path=Path(parsed_args.header_path),
             file_extensions=parsed_args.extensions_list,
             skip_hidden=parsed_args.skip_hidden,
-            parallelism=parsed_args.parallelism,
             debug=parsed_args.debug,
         )
 
@@ -120,14 +119,6 @@ class Cli:
             "--skip-hidden",
             help="adding header to hidden files",
             action="store_true",
-        )
-
-        parser.add_argument(
-            "--parallelism",
-            type=int,
-            help="",
-            required=False,
-            default=1,
         )
 
         parser.add_argument(

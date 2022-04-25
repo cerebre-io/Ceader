@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="ceader",
-    version="0.6",
+    version="0.0.1",
     license="MIT",
     author="Kamil Jankowski",
     author_email="kamil@cerebre.io",
@@ -13,3 +13,5 @@ setup(
     install_requires=[],
     python_requiers=">=3.8",
 )
+
+# python setup.py sdist

@@ -1,4 +1,4 @@
-MODULE      = ceader
+MODULE      = src/ceader
 LIBS        = $(MODULE) tests
 PYTHON      = poetry run python
 PRECOMMIT   = poetry run pre-commit
@@ -6,7 +6,6 @@ PRECOMMIT   = poetry run pre-commit
 FILES_DIR = .
 HEADER_PATH = tests/data/header.txt
 EXTENSIONS = .py .yaml
-PARALLELISM ?= 1 #NotImplemented
 
 
 .PHONY: clean fmt lint test init shell run-stack down-stack scrape
@@ -15,7 +14,7 @@ PARALLELISM ?= 1 #NotImplemented
 define run_ceader
 		${PYTHON} -m ${MODULE} --mode $(1)  \
 		--files-dir ${FILES_DIR} --header-path ${HEADER_PATH} \
-		--extensions-list ${EXTENSIONS} --parallelism ${PARALLELISM} \
+		--extensions-list ${EXTENSIONS} \
 		--debug
 endef
 

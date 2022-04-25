@@ -22,11 +22,9 @@ class Application:
     def __init__(
         self,
         file_repo: FileRepository,
-        parallelism: int,
         debug: bool = False,
     ) -> None:
         self.file_repo = file_repo
-        self.parallelism = parallelism
         self.debug = debug
 
         # TODO add postinit fun

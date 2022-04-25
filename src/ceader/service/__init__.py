@@ -10,7 +10,6 @@ def new_application(
     header_path: Path,
     file_extensions: List[str],
     skip_hidden: bool,
-    parallelism: int,
     debug: bool,
 ) -> Application:
     file_repo = FileDiskRepository(
@@ -22,6 +21,5 @@ def new_application(
     )
     return Application(
         file_repo=file_repo,
-        parallelism=parallelism,
         debug=debug,
     )
