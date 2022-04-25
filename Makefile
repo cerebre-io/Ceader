@@ -1,4 +1,4 @@
-MODULE      = src/ceader
+MODULE      = ceader
 LIBS        = $(MODULE) tests
 PYTHON      = poetry run python
 PRECOMMIT   = poetry run pre-commit

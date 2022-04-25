@@ -117,7 +117,7 @@
 #       - name: Generate XML Report
 #         run: PYTHONPATH=src/ poetry run python -m coverage xml
 
-
+#https://github.com/snok/install-poetry
 name: test
 
 on: [push]

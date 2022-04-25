@@ -4,9 +4,9 @@ from pathlib import Path
 import pytest
 
 from ceader.adapters.file_disk_repo import FileDiskRepository
+from tests import TEST_HEADER_PATH  # TODO Github actions cannot import it
 
-# from tests import TEST_HEADER_PATH
-TEST_HEADER_PATH = Path("./tests/data/header.txt")
+# TEST_HEADER_PATH = Path("./tests/data/header.txt")
 
 
 def test_NotADirectoryError() -> None:

@@ -11,7 +11,7 @@ from ceader.domain.knowledge.extensions_to_language import \
 from ceader.domain.utils import get_file_lines
 
 TEST_HEADER_PATH = Path("./tests/data/header.txt")
-# from tests import TEST_HEADER_PATH
+# from tests import TEST_HEADER_PATH  #TODO Github actions cannot import it
 
 
 # fmt: on
