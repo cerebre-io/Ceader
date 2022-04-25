@@ -2,13 +2,6 @@ import logging
 import os
 import sys
 
-import matplotlib
-
-# Set the backend to prevent warnings about GUIs being opened from a thread
-# other than the main thread and allow to use .renderer
-# also setting this in here because this gets execute before all other stuff
-matplotlib.use("Agg")
-
 # log level
 LOG_LEVEL = os.environ.get("LOG_LEVEL", "debug").upper()
 
