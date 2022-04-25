@@ -1,6 +1,6 @@
 from typing import Dict, Tuple
 
-from ceader.domain.types.enums import ComputerLanguage
+from src.ceader.domain.types.enums import ComputerLanguage
 
 # https://gist.github.com/ppisarczyk/43962d06686722d26d176fad46879d41
 

@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from ceader.adapters.file_disk_repo import FileDiskRepository
+from src.ceader.adapters.file_disk_repo import FileDiskRepository
 from tests import TEST_HEADER_PATH
 
 

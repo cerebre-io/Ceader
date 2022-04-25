@@ -1,8 +1,8 @@
 from pathlib import Path
 from typing import List
 
-from ceader.adapters.file_disk_repo import FileDiskRepository
-from ceader.app import Application
+from src.ceader.adapters.file_disk_repo import FileDiskRepository
+from src.ceader.app import Application
 
 
 def new_application(

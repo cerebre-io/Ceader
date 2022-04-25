@@ -6,12 +6,12 @@ import argparse
 from pathlib import Path
 from typing import List
 
-from ceader import get_logger
-from ceader.app import Application
+from src.ceader import get_logger
+from src.ceader.app import Application
 
 logger = get_logger()
 
-from ceader.service import new_application
+from src.ceader.service import new_application
 
 
 class Cli:
