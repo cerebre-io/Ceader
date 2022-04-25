@@ -9,7 +9,9 @@ from ceader.__main__ import run_cli
 from ceader.domain.knowledge.extensions_to_language import \
     EXTENSION_TO_PROGRAMMING_LANGUAGE_MAPPING
 from ceader.domain.utils import get_file_lines
-from tests import TEST_HEADER_PATH
+
+TEST_HEADER_PATH = Path("./tests/data/header.txt")
+# from tests import TEST_HEADER_PATH
 
 
 # fmt: on
