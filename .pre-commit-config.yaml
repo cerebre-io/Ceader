@@ -46,7 +46,7 @@ repos:
     hooks:
         - id: ceader
           args: [
-                '--mode', 'add_header',
+                '--mode', 'remove_header',
                 '--files-dir', 'data',
                 '--header-path', 'tests/data/header.txt',
                 '--extensions-list', '.py',
