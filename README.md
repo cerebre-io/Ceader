@@ -21,7 +21,7 @@ Visit us at: https://www.cerebre.io
 
 
 ### Installation
-From [PyPi](https://pypi.org/)
+From [PyPi](https://pypi.org/project/ceader/)
 ```
 pip install ceader
 ```
