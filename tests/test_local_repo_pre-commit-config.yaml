@@ -1,8 +1,7 @@
 files: ""
-exclude: "^(generated)"
 repos:
-  - repo: https://github.com/cerebre-io/ceader
-    rev: dc78030e89161ac56f23a6c18d5017fcdbfee7ba
+-   repo: .
+    rev: dc1ae12b0680d30ef4772bfd49629f0173bb8a39
     hooks:
     -   id: ceader
         args: [
@@ -16,6 +15,6 @@ repos:
 
 
 # #To reproduce test type:
-# pre-commit try-repo https://github.com/cerebre-io/ceader
+# pre-commit try-repo ../ceader
 # #Then copy rev: number here and run:
-# pre-commit run --config tests/.test_pre-commit-config.yaml
+# pre-commit run --config tests/.test_local_repo_pre-commit-config.yaml
