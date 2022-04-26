@@ -5,11 +5,11 @@ with open("README.md", "r") as fh:
 
 setup(
     name="ceader",
-    version="0.0.2",
+    version="0.0.3",
     license="MIT",
     author="Kamil Jankowski",
     author_email="mr.kamil.jankowski@gmail.com",
-    packages=find_packages(exclude=("./tests",)),
+    packages=find_packages(),
     url="https://github.com/cerebre-io/ceader",
     keywords="Header",
     python_requiers=">=3.8",
@@ -22,6 +22,9 @@ setup(
             "ceader=ceader.__main__:main",
         ]
     },
+    classifiers=[
+        "Programming Language :: Python :: 3",
+    ],
 )
 
 # python setup.py sdist
