@@ -1,7 +1,7 @@
 
 -   id: ceader
     name: ceader
-    description: ''
+    description: 'Tool for automatically adding a header to files in the form of a comment'
     entry: ceader
     language: python
     'types_or': [python, pyi]
