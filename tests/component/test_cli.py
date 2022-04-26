@@ -23,7 +23,7 @@ def test_cli_add_header() -> None:
             "--foo",  # to make sure that test works. We ignore first argv using MakeFile
             "--mode",
             "add_header",
-            "--files-dir",
+            "--files",
             str(tmpdirname),
             "--header-path",
             str(TEST_HEADER_PATH.resolve()),
@@ -46,7 +46,7 @@ def test_cli_add_and_remove_header() -> None:
             "--foo",  # to make sure that test works. We ignore first argv using MakeFile
             "--mode",
             "add_header",
-            "--files-dir",
+            "--files",
             str(tmpdirname),
             "--header-path",
             str(TEST_HEADER_PATH.resolve()),
@@ -61,7 +61,7 @@ def test_cli_add_and_remove_header() -> None:
             "--foo",  # to make sure that test works. We ignore first argv using MakeFile
             "--mode",
             "remove_header",
-            "--files-dir",
+            "--files",
             str(tmpdirname),
             "--header-path",
             str(TEST_HEADER_PATH.resolve()),
@@ -74,27 +74,6 @@ def test_cli_add_and_remove_header() -> None:
         file_1.close()
 
 
-def test_cli_not_dir() -> None:
-    with pytest.raises(ValueError):
-        with tempfile.TemporaryDirectory() as tmpdirname:
-            file_1 = tempfile.NamedTemporaryFile(suffix=".py", dir=tmpdirname)
-
-            assert (len(get_file_lines(Path(file_1.name)))) == 0
-            sys.argv = [
-                "--foo",  # to make sure that test works. We ignore first argv using MakeFile
-                "--mode",
-                "add_header",
-                "--files-dir",
-                str(TEST_HEADER_PATH.resolve()),
-                "--header-path",
-                str(TEST_HEADER_PATH.resolve()),
-                "--extensions-list",
-                ".py",
-                "--debug",
-            ]
-            run_cli()
-
-
 def test_cli_not_file() -> None:
     with pytest.raises(ValueError):
         with tempfile.TemporaryDirectory() as tmpdirname:
@@ -103,7 +82,7 @@ def test_cli_not_file() -> None:
                 "--foo",  # to make sure that test works. We ignore first argv using MakeFile
                 "--mode",
                 "add_header",
-                "--files-dir",
+                "--files",
                 str(tmpdirname),
                 "--header-path",
                 str(tmpdirname),
@@ -124,7 +103,7 @@ def test_cli_add_and_remove_header_all_ext() -> None:
                 "--foo",  # to make sure that test works. We ignore first argv using MakeFile
                 "--mode",
                 "add_header",
-                "--files-dir",
+                "--files",
                 str(tmpdirname),
                 "--header-path",
                 str(TEST_HEADER_PATH.resolve()),
@@ -139,7 +118,7 @@ def test_cli_add_and_remove_header_all_ext() -> None:
                 "--foo",  # to make sure that test works. We ignore first argv using MakeFile
                 "--mode",
                 "remove_header",
-                "--files-dir",
+                "--files",
                 str(tmpdirname),
                 "--header-path",
                 str(TEST_HEADER_PATH.resolve()),

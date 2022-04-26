@@ -41,7 +41,23 @@ def test_file_in_folder() -> None:
 
         files = repo.get_files()
 
-        assert len(list(files)) > 0
+        assert len(list(files)) == 1
+        file_1.close()
+
+
+def test_duplicated_files() -> None:
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        file_1 = tempfile.NamedTemporaryFile(suffix=".py", dir=tmpdirname)
+
+        repo = FileDiskRepository(
+            files=[Path(tmpdirname), Path(tmpdirname)],
+            header_path=TEST_HEADER_PATH,
+            extensions_to_get=[".py"],
+        )
+
+        files = repo.get_files()
+
+        assert len(list(files)) == 1
         file_1.close()
 
 
