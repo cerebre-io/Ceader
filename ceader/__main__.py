@@ -1,5 +1,4 @@
 import sys
-from datetime import datetime
 
 from ceader.ports.cli import Cli
 
@@ -11,11 +10,15 @@ def run_cli() -> int:
     return cli_app.run()
 
 
-if __name__ == "__main__":
-    start = datetime.now()
-    print(f"Creating headers started @ {start}")
+def main() -> int:
+    # start = datetime.now()
+    # print(f"Creating headers started @ {start}")
     exit_code = run_cli()
-    end = datetime.now()
-    print(f"Creating headers finished @ {end}")
-    print(f"Creating headers took: {end-start}")
-    sys.exit(exit_code)
+    # end = datetime.now()
+    # print(f"Creating headers finished @ {end}")
+    # print(f"Creating headers took: {end-start}")
+    return exit_code
+
+
+if __name__ == "__main__":
+    sys.exit(main())
