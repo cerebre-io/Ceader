@@ -36,6 +36,55 @@ def test_cli_add_header() -> None:
         file_1.close()
 
 
+def test_cli_add_header_to_file() -> None:
+
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        file_1 = tempfile.NamedTemporaryFile(suffix=".py", dir=tmpdirname)
+        assert (len(get_file_lines(Path(file_1.name)))) == 0
+
+        sys.argv = [
+            "--foo",  # to make sure that test works. We ignore first argv using MakeFile
+            "--mode",
+            "add_header",
+            "--files",
+            str(file_1.name),
+            "--header-path",
+            str(TEST_HEADER_PATH.resolve()),
+            "--extensions-list",
+            ".py",
+            "--debug",
+        ]
+        run_cli()
+        assert (len(get_file_lines(Path(file_1.name)))) > 0
+        file_1.close()
+
+
+def test_cli_add_header_to_file_and_folder() -> None:
+
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        file_1 = tempfile.NamedTemporaryFile(suffix=".py", dir=tmpdirname)
+        file_2 = tempfile.NamedTemporaryFile(suffix=".py")
+        assert (len(get_file_lines(Path(file_1.name)))) == 0
+
+        sys.argv = [
+            "--foo",  # to make sure that test works. We ignore first argv using MakeFile
+            "--mode",
+            "add_header",
+            "--files",
+            str(tmpdirname),
+            str(file_2.name),
+            "--header-path",
+            str(TEST_HEADER_PATH.resolve()),
+            "--extensions-list",
+            ".py",
+            "--debug",
+        ]
+        run_cli()
+        assert (len(get_file_lines(Path(file_1.name)))) > 0
+        file_1.close()
+        file_2.close()
+
+
 def test_cli_add_and_remove_header() -> None:
 
     with tempfile.TemporaryDirectory() as tmpdirname:
@@ -74,7 +123,7 @@ def test_cli_add_and_remove_header() -> None:
         file_1.close()
 
 
-def test_cli_not_file() -> None:
+def test_cli_header_is_not_file() -> None:
     with pytest.raises(ValueError):
         with tempfile.TemporaryDirectory() as tmpdirname:
 
@@ -120,6 +169,44 @@ def test_cli_add_and_remove_header_all_ext() -> None:
                 "remove_header",
                 "--files",
                 str(tmpdirname),
+                "--header-path",
+                str(TEST_HEADER_PATH.resolve()),
+                "--extensions-list",
+                f"{ext}",
+                "--debug",
+            ]
+            run_cli()
+            assert (len(get_file_lines(Path(file_1.name)))) == 0
+            file_1.close()
+
+
+def test_cli_add_and_remove_header_to_file() -> None:
+    for ext in EXTENSION_TO_PROGRAMMING_LANGUAGE_MAPPING.keys():
+        with tempfile.TemporaryDirectory() as tmpdirname:
+            file_1 = tempfile.NamedTemporaryFile(suffix=ext, dir=tmpdirname)
+            assert (len(get_file_lines(Path(file_1.name)))) == 0
+
+            sys.argv = [
+                "--foo",  # to make sure that test works. We ignore first argv using MakeFile
+                "--mode",
+                "add_header",
+                "--files",
+                str(file_1.name),
+                "--header-path",
+                str(TEST_HEADER_PATH.resolve()),
+                "--extensions-list",
+                f"{ext}",
+                "--debug",
+            ]
+            run_cli()
+            assert (len(get_file_lines(Path(file_1.name)))) > 0
+
+            sys.argv = [
+                "--foo",  # to make sure that test works. We ignore first argv using MakeFile
+                "--mode",
+                "remove_header",
+                "--files",
+                str(file_1.name),
                 "--header-path",
                 str(TEST_HEADER_PATH.resolve()),
                 "--extensions-list",
