@@ -9,12 +9,11 @@ setup(
     license="MIT",
     author="Kamil Jankowski",
     author_email="mr.kamil.jankowski@gmail.com",
-    packages=find_packages(where="./ceader", exclude=("./tests",)),
+    packages=find_packages(exclude=("./tests",)),
     url="https://github.com/cerebre-io/ceader",
     keywords="Header",
     python_requiers=">=3.8",
-    py_modules=["ceader"],  # Name of the python package
-    package_dir={"": "ceader"},
+    include_package_data=True,
     description="Tool for automatically adding a header to files in the form of a comment.",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -28,3 +27,4 @@ setup(
 # python setup.py sdist
 # python setup.py sdist bdist_wheel
 # python -m twine upload --verbose --repository testpypi dist/*
+# ceader --mode add_header --files-dir data --header-path tests/data/header.txt --extensions .py .yaml --debug

@@ -20,9 +20,14 @@ Visit us at: https://www.cerebre.io
 
 
 
+### Installation
+From [PyPi](https://pypi.org/)
+```
+pip install ceader
+```
 
 
-### Pre-commit
+### Pre-commit plugin
 In order to use ceader in pre-commit add the following configuration to your .pre-commit-config.yaml:
 ```
 repos:
@@ -35,43 +40,45 @@ repos:
                 '--files-dir', ${FILES_DIR},
                 '--header-path', ${HEADER_PATH},
                 '--extensions-list', ${EXTENSIONS},
+                '--debug',
+                '--skip-hidden',
                 '--']
 ```
-##### FILES_DIR
+###### FILES_DIR
 This is the path to the folder where the files need to be changed.\
 In this folder, files will be searched recursively.
 
-##### HEADER_PATH
+###### HEADER_PATH
 Path to the file in .txt format with the header to be added.
 
-##### EXTENSIONS
+###### EXTENSIONS
 Files with these extensions will be searched for in the ${FILES_DIR}. \
 The programming language will be recognized by this information and an appropriate comment will be added. For example:
-```
-EXTENSIONS = .py .yaml .txt
-```
-or in yaml format:
 
-```
-'--extensions-list', '.py', '.yaml', '.txt'
-```
 TODO add a list of working extensions
 
+###### DEBUG
+An optional boolean value that allows checking the status of adding headers.
 
-##### MODE
+###### SKIP_HIDDEN
+An optional boolean that allows you to ignore hidden files, even if they meet the extension condition.
+
+
+###### MODE
 
 There are two modes at the moment:\
-    - 'add_header' adds the indicated header to files, if header already exists in the file it does nothing\
-    - 'remove_header' removes the indicated header to files, but only if header exists in the file\
+    - ```add_header``` adds the indicated header to files, if header already exists in the file it does nothing.\
+    - ```remove_header``` removes the indicated header to files, but only if header exists in the file.
 
-
+### Exemplary cli usage
+```
+ceader --mode add_header --files-dir ${FILES_DIR} --header-path ${HEADER_PATH} --extensions ${EXTENSIONS} --debug --skip-hidden
+```
 
 
 
 ### TODO
 
-- CI/CD
-- pypi
 - pre-commit plugin
 - user validation
-- backups
+- files backup
