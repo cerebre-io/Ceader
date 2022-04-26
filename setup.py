@@ -20,7 +20,7 @@ setup(
     long_description_content_type="text/markdown",
     entry_points={
         "console_scripts": [
-            "ceader=ceader.__main__:run_cli",
+            "ceader=ceader.__main__:main",
         ]
     },
 )
