@@ -91,30 +91,28 @@ class HeaderProcedure:
             return get_file_lines(header_path)
 
         def use_single_line_comment_method(
-            comment_data: CommentData, lines: List[str]
+            single_line_comment: str, lines: List[str]
         ) -> List[str]:
 
             for i, line in enumerate(lines):
-                lines[i] = comment_data.single_line_comment + line
+                lines[i] = single_line_comment + line
             return lines
 
         def use_multi_line_comment_method(
-            comment_data: CommentData, lines: List[str]
+            multi_line_comment: Tuple[str, str], lines: List[str]
         ) -> List[str]:
             return (
-                [comment_data.multi_line_comment[0] + "\n"]
-                + lines
-                + [comment_data.multi_line_comment[1] + "\n"]
+                [multi_line_comment[0] + "\n"] + lines + [multi_line_comment[1] + "\n"]
             )
 
         header_lines = get_header_lines(header_path)
         if comment_data.single_line_comment is not None:
             ceader_lines = use_single_line_comment_method(
-                comment_data=comment_data, lines=header_lines
+                single_line_comment=comment_data.single_line_comment, lines=header_lines
             )
         elif comment_data.multi_line_comment is not None:
             ceader_lines = use_multi_line_comment_method(
-                comment_data=comment_data, lines=header_lines
+                multi_line_comment=comment_data.multi_line_comment, lines=header_lines
             )
         else:
             raise ValueError("Something wrong with CommentData")
