@@ -29,4 +29,4 @@ setup(
 
 # python setup.py sdist bdist_wheel
 # python -m twine upload --verbose --repository testpypi dist/*
-# ceader --mode add_header --files-dir data --header-path tests/data/header.txt --extensions .py .yaml --debug
+# ceader --mode add_header --files-dir tests/data/fake_files --header-path tests/data/headers/cerebre_header.txt --extensions-list .py .yaml --debug

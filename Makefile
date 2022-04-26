@@ -3,7 +3,7 @@ LIBS        = $(MODULE) tests
 PYTHON      = poetry run python
 PRECOMMIT   = poetry run pre-commit
 
-FILES_DIR = data
+FILES_DIR = tests/data/fake_files
 HEADER_PATH = tests/data/headers/cerebre_header.txt
 EXTENSIONS = .py .yaml
 

@@ -27,7 +27,7 @@ pip install ceader
 ```
 ### Exemplary cli usage
 ```
-ceader --mode add_header --files-dir ${FILES_DIR} --header-path ${HEADER_PATH} --extensions ${EXTENSIONS} --debug --skip-hidden
+ceader --mode add_header --files-dir ${FILES_DIR} --header-path ${HEADER_PATH} --extensions-list ${EXTENSIONS} --debug --skip-hidden
 ```
 
 ### Pre-commit plugin
@@ -44,8 +44,7 @@ repos:
                 '--header-path', ${HEADER_PATH},
                 '--extensions-list', ${EXTENSIONS},
                 '--debug',
-                '--skip-hidden',
-                '--']
+                '--skip-hidden']
 ```
 [pre-commit](https://pre-commit.com/) is a framework based on passing filenames to executables, but for now we need to turn it off, beacuse we are passing path to directory.
 
@@ -80,6 +79,5 @@ There are two modes at the moment:\
 
 ### TODO
 
-- pre-commit plugin
-- user validation
+- user validation (e.g: lint)
 - files backup
