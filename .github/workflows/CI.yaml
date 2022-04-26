@@ -5,7 +5,7 @@ name: CI
 on: [push]
 
 jobs:
-  CI:
+  build:
     runs-on: ubuntu-latest
     steps:
       #----------------------------------------------
@@ -48,9 +48,14 @@ jobs:
       #----------------------------------------------
       - name: Install library
         run: poetry install --no-interaction
-      #----------------------------------------------
-      #               run linter
-      #----------------------------------------------
+
+  lint:
+    #----------------------------------------------
+    #               run linter
+    #----------------------------------------------
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: Run linter
         run: |
             poetry run python -m black --check ceader tests
@@ -60,9 +65,14 @@ jobs:
             poetry run python -m isort --check-only ceader tests
             poetry run python -m mypy ceader tests
             poetry run python -m bandit --configfile .bandit.yaml --recursive ceader tests
-      #----------------------------------------------
-      #              run test suite
-      #----------------------------------------------
+
+  tests:
+    #----------------------------------------------
+    #              run test suite
+    #----------------------------------------------
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
       - name: Run tests
         run: |
           source .venv/bin/activate
