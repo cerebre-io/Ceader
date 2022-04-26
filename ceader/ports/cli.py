@@ -35,7 +35,7 @@ class Cli:
     def new_cli_app(cls, args: List[str]) -> Cli:
         parsed_args = Cli.parse_args(*args)
         app = new_application(
-            files_dir=Path(parsed_args.files_dir),
+            files=parsed_args.files,
             header_path=Path(parsed_args.header_path),
             file_extensions=parsed_args.extensions_list,
             skip_hidden=parsed_args.skip_hidden,
@@ -90,9 +90,11 @@ class Cli:
         )
 
         parser.add_argument(
-            "--files-dir",
+            "--files",
             type=str,
-            help=("root path to files."),
+            nargs="+",
+            help=("List of paths to files and folders "),
+            default=[],
             required=True,
         )
 
@@ -126,9 +128,10 @@ class Cli:
 
         namespace = parser.parse_args(args)
 
-        files_path = Path(namespace.files_dir)
-        if files_path.is_file():
-            raise ValueError(f"{files_path} is not a directory")
+        file_paths: List[str] = list(namespace.files)
+        for path in file_paths:
+            if not (Path(path).is_file() or Path(path).is_dir()):
+                raise ValueError(f"{path} is not a file!")
 
         header_path = Path(namespace.header_path)
 
