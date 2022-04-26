@@ -5,5 +5,5 @@
     entry: ceader
     language: python
     'types_or': [python, pyi]
-    args: ["--mode",'--files-dir','--header-path','--extensions-list','--skip-hidden','--debug']
+    args: ["--mode",'--files-dir','--header-path','--extensions','--skip-hidden','--debug']
     require_serial: true

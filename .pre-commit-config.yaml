@@ -48,7 +48,7 @@ repos:
   #               '--mode', 'add_header',
   #               '--files', 'tests/data/fake_files',
   #               '--header-path', 'tests/data/headers/cerebre_header.txt',
-  #               '--extensions-list', '.py',
+  #               '--extensions', '.py',
   #               '--debug',
   #               '--skip-hidden',
   #               ]
@@ -60,7 +60,7 @@ repos:
   #               '--mode', 'remove_header',
   #               '--files-dir', '.',
   #               '--header-path', 'tests/data/headers/cerebre_header.txt',
-  #               '--extensions-list', '.py',
+  #               '--extensions', '.py',
   #               '--debug',
   #               '--skip-hidden',
   #               ]

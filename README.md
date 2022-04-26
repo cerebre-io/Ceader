@@ -18,7 +18,25 @@ Proprietary software created by CEREBRE.
 Visit us at: https://www.cerebre.io
 ```
 
+Sample output:
 
+.py file without header:
+```
+print("Hello world!")
+```
+.py file with header:
+```
+#                    _                _
+#   ___ ___ _ __ ___| |__  _ __ ___  (_) ___
+#  / __/ _ \ '__/ _ \ '_ \| '__/ _ \ | |/ _ \
+# | (_|  __/ | |  __/ |_) | | |  __/_| | (_) |
+#  \___\___|_|  \___|_.__/|_|  \___(_)_|\___/
+#
+#Proprietary software created by CEREBRE.
+#© CEREBRE, USA. All rights reserved.
+#Visit us at: https://www.cerebre.io
+print("Hello world!")
+```
 
 ### Installation
 From [PyPi](https://pypi.org/project/ceader/)
@@ -27,11 +45,17 @@ pip install ceader
 ```
 ### Exemplary cli usage
 ```
-ceader --mode add_header --files-dir ${FILES_DIR} --header-path ${HEADER_PATH} --extensions-list ${EXTENSIONS} --debug --skip-hidden
+ceader --mode add_header --files ${FILES} --header-path ${HEADER_PATH} --extensions ${EXTENSIONS} --debug --skip-hidden
 ```
 
 ### Pre-commit plugin
-In order to use ceader in pre-commit add the following configuration to your .pre-commit-config.yaml:
+In order to use ceader in pre-commit, the following two configs are recommended:
+- always run on the specified files.
+- run at certain stages (by default ```stages: all stages```, check pre-commit [documentation](https://pre-commit.com/)).
+
+##### Always run
+
+Add the following configuration to your .pre-commit-config.yaml:
 ```
 repos:
     - repo: https://github.com/cerebre-io/ceader
@@ -40,22 +64,42 @@ repos:
         - id: ceader
             args:[
                 '--mode', ${MODE},
-                '--files', ${FILESR},
                 '--header-path', ${HEADER_PATH},
-                '--extensions-list', ${EXTENSIONS},
+                '--extensions', ${EXTENSIONS},
                 '--debug',
-                '--skip-hidden']
+                '--skip-hidden',
+                '--files', ${FILES}]
+            pass_filenames: false
 ```
 
-
+With this config ceader will try to change ```${FILES}``` every time.
+##### Run at certain stages
+Add the following configuration to your .pre-commit-config.yaml:
+```
+repos:
+    - repo: https://github.com/cerebre-io/ceader
+        rev: 0.0.4
+        hooks:
+        - id: ceader
+            args:[
+                '--mode', ${MODE},
+                '--header-path', ${HEADER_PATH},
+                '--extensions', ${EXTENSIONS},
+                '--debug',
+                '--skip-hidden',
+                '--files']
+            stages: "add stages here"
+```
+With this config ceader will try to change files provided by pre-commit on given stages.
+```stages``` is optional, because by default stages: all stages
 ###### FILES
-This is the List\[Path\] to folders or directly to files that need to be changed. In folders, files will be searched recursively.
+This is the List of Paths to folders or directly to files that need to be changed. In folders, files will be searched recursively.
 
 ###### HEADER_PATH
 Path to the file in .txt format with the header to be added.
 
 ###### EXTENSIONS
-Files with these extensions will be searched for in the ${FILES}. \
+Files with these extensions will be searched for in the ```${FILES}```. \
 The programming language will be recognized by this information and an appropriate comment will be added.
 Supported extensions and languages can be found [here](https://github.com/cerebre-io/ceader/blob/main/ceader/domain/knowledge/extensions_to_language.py).
 

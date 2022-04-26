@@ -27,7 +27,7 @@ def test_cli_add_header() -> None:
             str(tmpdirname),
             "--header-path",
             str(TEST_HEADER_PATH.resolve()),
-            "--extensions-list",
+            "--extensions",
             ".py",
             "--debug",
         ]
@@ -50,7 +50,7 @@ def test_cli_add_header_to_file() -> None:
             str(file_1.name),
             "--header-path",
             str(TEST_HEADER_PATH.resolve()),
-            "--extensions-list",
+            "--extensions",
             ".py",
             "--debug",
         ]
@@ -75,7 +75,7 @@ def test_cli_add_header_to_file_and_folder() -> None:
             str(file_2.name),
             "--header-path",
             str(TEST_HEADER_PATH.resolve()),
-            "--extensions-list",
+            "--extensions",
             ".py",
             "--debug",
         ]
@@ -99,7 +99,7 @@ def test_cli_add_and_remove_header() -> None:
             str(tmpdirname),
             "--header-path",
             str(TEST_HEADER_PATH.resolve()),
-            "--extensions-list",
+            "--extensions",
             ".py",
             "--debug",
         ]
@@ -114,7 +114,7 @@ def test_cli_add_and_remove_header() -> None:
             str(tmpdirname),
             "--header-path",
             str(TEST_HEADER_PATH.resolve()),
-            "--extensions-list",
+            "--extensions",
             ".py",
             "--debug",
         ]
@@ -135,7 +135,7 @@ def test_cli_header_is_not_file() -> None:
                 str(tmpdirname),
                 "--header-path",
                 str(tmpdirname),
-                "--extensions-list",
+                "--extensions",
                 ".py",
                 "--debug",
             ]
@@ -156,7 +156,7 @@ def test_cli_add_and_remove_header_all_ext() -> None:
                 str(tmpdirname),
                 "--header-path",
                 str(TEST_HEADER_PATH.resolve()),
-                "--extensions-list",
+                "--extensions",
                 f"{ext}",
                 "--debug",
             ]
@@ -171,7 +171,7 @@ def test_cli_add_and_remove_header_all_ext() -> None:
                 str(tmpdirname),
                 "--header-path",
                 str(TEST_HEADER_PATH.resolve()),
-                "--extensions-list",
+                "--extensions",
                 f"{ext}",
                 "--debug",
             ]
@@ -194,7 +194,7 @@ def test_cli_add_and_remove_header_to_file() -> None:
                 str(file_1.name),
                 "--header-path",
                 str(TEST_HEADER_PATH.resolve()),
-                "--extensions-list",
+                "--extensions",
                 f"{ext}",
                 "--debug",
             ]
@@ -209,7 +209,7 @@ def test_cli_add_and_remove_header_to_file() -> None:
                 str(file_1.name),
                 "--header-path",
                 str(TEST_HEADER_PATH.resolve()),
-                "--extensions-list",
+                "--extensions",
                 f"{ext}",
                 "--debug",
             ]
@@ -236,7 +236,7 @@ def test_cli_add_and_remove_header_to_file() -> None:
 #              str(tmpdirname),
 #             "--header-path",
 #             str(TEST_HEADER_PATH.resolve()),
-# 		    "--extensions-list",
+# 		    "--extensions",
 #             ".py",
 # 		    "--debug"
 #         ]

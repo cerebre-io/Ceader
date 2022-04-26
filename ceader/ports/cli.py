@@ -37,7 +37,7 @@ class Cli:
         app = new_application(
             files=parsed_args.files,
             header_path=Path(parsed_args.header_path),
-            file_extensions=parsed_args.extensions_list,
+            file_extensions=parsed_args.extensions,
             skip_hidden=parsed_args.skip_hidden,
             debug=parsed_args.debug,
         )
@@ -106,7 +106,7 @@ class Cli:
         )
 
         parser.add_argument(
-            "--extensions-list",
+            "--extensions",
             type=str,
             nargs="+",
             help=("file extensions which ll be changed by ceader."),

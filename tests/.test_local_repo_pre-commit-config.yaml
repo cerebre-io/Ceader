@@ -1,14 +1,14 @@
 files: ""
 repos:
 -   repo: .
-    rev: 8aab170e2b373e9d9af94c93772c267f494b868f
+    rev: ef892870ac21c82930cb8c5f99b78f9f2f312504
     hooks:
     -   id: ceader
         args: [
                 '--mode', 'remove_header',
 
                 '--header-path', 'tests/data/headers/cerebre_header.txt',
-                '--extensions-list', '.py',
+                '--extensions', '.py',
                 '--debug',
                 '--skip-hidden',
                 '--files',
