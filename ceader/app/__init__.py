@@ -38,7 +38,7 @@ class Application:
 
     def add_header_to_files(
         self, files_to_change: List[Path], header_path: Path
-    ) -> None:
+    ) -> int:
 
         res_dict: Dict[CeaderStatus, int] = {
             CeaderStatus.SUCCESS: 0,
@@ -52,7 +52,10 @@ class Application:
         if self.debug:
             for key, value in res_dict.items():
                 logger.info(f"{key.value}:{value}")
-        return
+
+        if res_dict[CeaderStatus.FAILURE] > 0:
+            return 1
+        return 0
 
     def remove_header_from_file(
         self, filepath: Path, header_path: Path
@@ -61,7 +64,7 @@ class Application:
 
     def remove_header_from_files(
         self, files_to_change: List[Path], header_path: Path
-    ) -> None:
+    ) -> int:
 
         res_dict: Dict[CeaderStatus, int] = {
             CeaderStatus.SUCCESS: 0,
@@ -74,7 +77,9 @@ class Application:
         if self.debug:
             for key, value in res_dict.items():
                 logger.info(f"{key.value}:{value}")
-        return
+        if res_dict[CeaderStatus.FAILURE] > 0:
+            return 1
+        return 0
 
 
 def _remove_header_from_file(

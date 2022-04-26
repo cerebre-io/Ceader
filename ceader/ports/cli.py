@@ -56,23 +56,20 @@ class Cli:
         if run_fun is None:
             raise ValueError(f"Mode {self.mode} not found")
 
-        run_fun(files_to_change, header_file)
-        return 0
+        return run_fun(files_to_change, header_file)
 
-    def add_header_flow(self, files_to_change: List[Path], header_path: Path) -> None:
+    def add_header_flow(self, files_to_change: List[Path], header_path: Path) -> int:
 
-        self.app.add_header_to_files(
+        return self.app.add_header_to_files(
             files_to_change=files_to_change, header_path=header_path
         )
 
         # if not success:
         #     raise ValueError(f"failed to add header to files, see previous logs")
 
-    def remove_header_flow(
-        self, files_to_change: List[Path], header_path: Path
-    ) -> None:
+    def remove_header_flow(self, files_to_change: List[Path], header_path: Path) -> int:
 
-        self.app.remove_header_from_files(
+        return self.app.remove_header_from_files(
             files_to_change=files_to_change, header_path=header_path
         )
 
