@@ -6,11 +6,12 @@ repos:
     -   id: ceader
         args: [
                 '--mode', 'remove_header',
-                '--files', 'tests/data/fake_files/test_2.py',
+
                 '--header-path', 'tests/data/headers/cerebre_header.txt',
                 '--extensions-list', '.py',
                 '--debug',
                 '--skip-hidden',
+                '--files',
                 ]
 
 
