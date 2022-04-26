@@ -6,7 +6,7 @@ setup(
     license="MIT",
     author="Kamil Jankowski",
     author_email="kamil@cerebre.io",
-    packages=find_packages(),
+    packages=find_packages(where="./ceader", exclude=("./tests",)),
     url="https://github.com/cerebre-io/ceader",
     keywords="Header",
     python_requiers=">=3.8",
