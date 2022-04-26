@@ -4,7 +4,7 @@ PYTHON      = poetry run python
 PRECOMMIT   = poetry run pre-commit
 
 FILES_DIR = data
-HEADER_PATH = tests/data/header.txt
+HEADER_PATH = tests/data/headers/cerebre_header.txt
 EXTENSIONS = .py .yaml
 
 
