@@ -10,6 +10,8 @@ setup(
     url="https://github.com/cerebre-io/ceader",
     keywords="Header",
     python_requiers=">=3.8",
+    py_modules=["ceader"],  # Name of the python package
+    package_dir={"": "ceader"},
 )
 
 # python setup.py sdist
