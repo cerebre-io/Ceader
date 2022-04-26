@@ -30,6 +30,17 @@ def test_ExtensionsValueError_2() -> None:
             _ = repo.get_files()
 
 
+def test_ExtensionsValueError_3() -> None:
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        with pytest.raises(ValueError):
+            repo = FileDiskRepository(
+                files=[Path(tmpdirname)],
+                header_path=TEST_HEADER_PATH,
+                extensions_to_get=[".txt", "py"],
+            )
+            _ = repo.get_files()
+
+
 def test_file_in_folder() -> None:
     with tempfile.TemporaryDirectory() as tmpdirname:
         file_1 = tempfile.NamedTemporaryFile(suffix=".py", dir=tmpdirname)
@@ -288,6 +299,18 @@ def test_skipping_hidden_files() -> None:
         files = repo.get_files()
 
         assert len(list(files)) == 0
+
+
+def test_extension_deduplication() -> None:
+    with tempfile.TemporaryDirectory() as temp_dir:
+        repo = FileDiskRepository(
+            files=[Path(temp_dir)],
+            header_path=TEST_HEADER_PATH,
+            extensions_to_get=[".txt", ".txt"],
+            skip_hidden=True,
+        )
+
+        assert len(repo.extensions_to_get) == 1
 
 
 # python -m pytest tests/integration/test_file_disk_repo.py
