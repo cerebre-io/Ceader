@@ -43,7 +43,10 @@ repos:
                 '--debug',
                 '--skip-hidden',
                 '--']
+            pass_filenames: false
 ```
+pre-commit is a framework based on passing filenames to executables, but for now we need to turn it off, beacuse we are passing path to directory.
+
 ###### FILES_DIR
 This is the path to the folder where the files need to be changed.\
 In this folder, files will be searched recursively.

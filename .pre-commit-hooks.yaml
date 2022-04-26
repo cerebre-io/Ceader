@@ -8,3 +8,4 @@
     args: ["--mode",'--files-dir','--header-path','--extensions-list','--skip-hidden','--debug']
     require_serial: true
     always_run: true
+    pass_filenames: false
