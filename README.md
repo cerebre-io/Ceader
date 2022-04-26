@@ -47,8 +47,7 @@ repos:
                 '--skip-hidden',
                 '--']
 ```
-[pre-commit](https://pre-commit.com/) is a framework based on passing filenames to executables, but for now we need to turn it off, beacuse we are passing path to directory./
-It is worth noting that pre-commit will change the headers of files that have been modified by us in the given commit, so if you want to change all files use CLI.
+[pre-commit](https://pre-commit.com/) is a framework based on passing filenames to executables, but for now we need to turn it off, beacuse we are passing path to directory.
 
 ###### FILES_DIR
 This is the path to the folder where the files need to be changed.\
