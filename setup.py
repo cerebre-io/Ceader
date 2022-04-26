@@ -9,7 +9,7 @@ setup(
     license="MIT",
     author="Kamil Jankowski",
     author_email="mr.kamil.jankowski@gmail.com",
-    packages=find_packages(),
+    packages=find_packages(exclude=["tests"]),
     url="https://github.com/cerebre-io/ceader",
     keywords="Header",
     python_requiers=">=3.8",

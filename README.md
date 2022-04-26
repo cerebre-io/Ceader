@@ -40,26 +40,24 @@ repos:
         - id: ceader
             args:[
                 '--mode', ${MODE},
-                '--files-dir', ${FILES_DIR},
+                '--files', ${FILESR},
                 '--header-path', ${HEADER_PATH},
                 '--extensions-list', ${EXTENSIONS},
                 '--debug',
                 '--skip-hidden']
 ```
-[pre-commit](https://pre-commit.com/) is a framework based on passing filenames to executables, but for now we need to turn it off, beacuse we are passing path to directory.
 
-###### FILES_DIR
-This is the path to the folder where the files need to be changed.\
-In this folder, files will be searched recursively.
+
+###### FILES
+This is the List\[Path\] to folders or directly to files that need to be changed. In folders, files will be searched recursively.
 
 ###### HEADER_PATH
 Path to the file in .txt format with the header to be added.
 
 ###### EXTENSIONS
-Files with these extensions will be searched for in the ${FILES_DIR}. \
-The programming language will be recognized by this information and an appropriate comment will be added. For example:
-
-TODO add a list of working extensions
+Files with these extensions will be searched for in the ${FILES}. \
+The programming language will be recognized by this information and an appropriate comment will be added.
+Supported extensions and languages can be found [here](https://github.com/cerebre-io/ceader/blob/main/ceader/domain/knowledge/extensions_to_language.py).
 
 ###### DEBUG
 An optional boolean value that allows checking the status of adding headers.
