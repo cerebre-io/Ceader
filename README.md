@@ -35,7 +35,7 @@ In order to use ceader in pre-commit add the following configuration to your .pr
 ```
 repos:
     - repo: https://github.com/cerebre-io/ceader
-        rev: 0.0.1
+        rev: 0.0.4
         hooks:
         - id: ceader
             args:[
