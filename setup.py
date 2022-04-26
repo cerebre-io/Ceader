@@ -8,7 +8,7 @@ setup(
     version="0.0.2",
     license="MIT",
     author="Kamil Jankowski",
-    author_email="kamil@cerebre.io",
+    author_email="mr.kamil.jankowski@gmail.com",
     packages=find_packages(where="./ceader", exclude=("./tests",)),
     url="https://github.com/cerebre-io/ceader",
     keywords="Header",
