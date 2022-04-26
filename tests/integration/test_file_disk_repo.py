@@ -1,3 +1,4 @@
+import os
 import tempfile
 from pathlib import Path
 
@@ -219,6 +220,74 @@ def test_ignore_header() -> None:
     header = repo.get_header()
     files = repo.get_files()
     assert header is not None and len(files) == 0
+
+
+# python -m pytest tests/integration/test_file_disk_repo.py
+
+
+def test_not_skipping_hidden_files_in_folder() -> None:
+    with tempfile.TemporaryDirectory() as temp_dir:
+        test_file = open(os.path.join(Path(temp_dir), ".text_file.txt"), "w")
+        test_file.close()
+
+        repo = FileDiskRepository(
+            files=[Path(temp_dir)],
+            header_path=TEST_HEADER_PATH,
+            extensions_to_get=[".txt"],
+            skip_hidden=False,
+        )
+
+        files = repo.get_files()
+
+        assert len(list(files)) == 1
+
+
+def test_skipping_hidden_files_in_folder() -> None:
+    with tempfile.TemporaryDirectory() as temp_dir:
+        test_file = open(os.path.join(Path(temp_dir), ".text_file.txt"), "w")
+        test_file.close()
+        repo = FileDiskRepository(
+            files=[Path(temp_dir)],
+            header_path=TEST_HEADER_PATH,
+            extensions_to_get=[".txt"],
+            skip_hidden=True,
+        )
+
+        files = repo.get_files()
+
+        assert len(list(files)) == 0
+
+
+def test_not_skipping_hidden_files() -> None:
+    with tempfile.TemporaryDirectory() as temp_dir:
+        test_file = open(os.path.join(Path(temp_dir), ".text_file.txt"), "w")
+        test_file.close()
+        repo = FileDiskRepository(
+            files=[Path(test_file.name)],
+            header_path=TEST_HEADER_PATH,
+            extensions_to_get=[".txt"],
+            skip_hidden=False,
+        )
+
+        files = repo.get_files()
+
+        assert len(list(files)) == 1
+
+
+def test_skipping_hidden_files() -> None:
+    with tempfile.TemporaryDirectory() as temp_dir:
+        test_file = open(os.path.join(Path(temp_dir), ".text_file.txt"), "w")
+        test_file.close()
+        repo = FileDiskRepository(
+            files=[Path(test_file.name)],
+            header_path=TEST_HEADER_PATH,
+            extensions_to_get=[".txt"],
+            skip_hidden=True,
+        )
+
+        files = repo.get_files()
+
+        assert len(list(files)) == 0
 
 
 # python -m pytest tests/integration/test_file_disk_repo.py
