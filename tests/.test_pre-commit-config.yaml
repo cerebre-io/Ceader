@@ -1,0 +1,21 @@
+files: ""
+exclude: "^(generated)"
+repos:
+  - repo: https://github.com/cerebre-io/ceader
+    rev: dc78030e89161ac56f23a6c18d5017fcdbfee7ba
+    hooks:
+    -   id: ceader
+        args: [
+                '--mode', 'remove_header',
+                '--files', 'tests/data/fake_files',
+                '--header-path', 'tests/data/headers/cerebre_header.txt',
+                '--extensions-list', '.py',
+                '--debug',
+                '--skip-hidden',
+                ]
+
+
+# #To reproduce test type:
+# pre-commit try-repo https://github.com/cerebre-io/ceader
+# #Then copy rev: number here and run:
+# pre-commit run --config tests/.test_pre-commit-config.yaml
