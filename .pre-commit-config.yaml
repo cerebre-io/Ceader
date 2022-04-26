@@ -42,6 +42,18 @@ repos:
           - .bandit.yaml
           - --recursive
   # - repo: https://github.com/cerebre-io/ceader
+  #   rev: 89ad7105754797aee832b3af64ea211b7f7647ea
+  #   hooks:
+  #   -   id: ceader
+  #       args: [
+  #               '--mode', 'add_header',
+  #               '--files', 'tests/data/fake_files',
+  #               '--header-path', 'tests/data/headers/cerebre_header.txt',
+  #               '--extensions-list', '.py',
+  #               '--debug',
+  #               '--skip-hidden',
+  #               ]
+  # - repo: https://github.com/cerebre-io/ceader
   #   rev: "0.0.4"
   #   hooks:
   #       - id: ceader

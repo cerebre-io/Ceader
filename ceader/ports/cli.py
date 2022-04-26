@@ -131,7 +131,7 @@ class Cli:
         file_paths: List[str] = list(namespace.files)
         for path in file_paths:
             if not (Path(path).is_file() or Path(path).is_dir()):
-                raise ValueError(f"{path} is not a file!")
+                raise ValueError(f"{path} doesn't exist!")
 
         header_path = Path(namespace.header_path)
 
