@@ -1,11 +1,12 @@
 # Ceader
 
 Tool for automatically adding a header to files in the form of a comment.\
-Based on the file extensions, Ceader detects the programming language and selects the comment character accordingly.\
+Based on the file extensions, Ceader detects the programming language and selects the comment character accordingly.
 
 Header sample, created by [this](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) software:
-```
 
+
+```
                     _                _
    ___ ___ _ __ ___| |__  _ __ ___  (_) ___
   / __/ _ \ '__/ _ \ '_ \| '__/ _ \ | |/ _ \
@@ -16,6 +17,8 @@ Proprietary software created by CEREBRE.
 © CEREBRE, USA. All rights reserved.
 Visit us at: https://www.cerebre.io
 ```
+
+
 
 
 
