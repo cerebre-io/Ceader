@@ -25,7 +25,10 @@ From [PyPi](https://pypi.org/project/ceader/)
 ```
 pip install ceader
 ```
-
+### Exemplary cli usage
+```
+ceader --mode add_header --files-dir ${FILES_DIR} --header-path ${HEADER_PATH} --extensions ${EXTENSIONS} --debug --skip-hidden
+```
 
 ### Pre-commit plugin
 In order to use ceader in pre-commit add the following configuration to your .pre-commit-config.yaml:
@@ -43,9 +46,9 @@ repos:
                 '--debug',
                 '--skip-hidden',
                 '--']
-            pass_filenames: false
 ```
-pre-commit is a framework based on passing filenames to executables, but for now we need to turn it off, beacuse we are passing path to directory.
+[pre-commit](https://pre-commit.com/) is a framework based on passing filenames to executables, but for now we need to turn it off, beacuse we are passing path to directory./
+It is worth noting that pre-commit will change the headers of files that have been modified by us in the given commit, so if you want to change all files use CLI.
 
 ###### FILES_DIR
 This is the path to the folder where the files need to be changed.\
@@ -73,10 +76,6 @@ There are two modes at the moment:\
     - ```add_header``` adds the indicated header to files, if header already exists in the file it does nothing.\
     - ```remove_header``` removes the indicated header to files, but only if header exists in the file.
 
-### Exemplary cli usage
-```
-ceader --mode add_header --files-dir ${FILES_DIR} --header-path ${HEADER_PATH} --extensions ${EXTENSIONS} --debug --skip-hidden
-```
 
 
 

@@ -27,7 +27,6 @@ setup(
     ],
 )
 
-# python setup.py sdist
 # python setup.py sdist bdist_wheel
 # python -m twine upload --verbose --repository testpypi dist/*
 # ceader --mode add_header --files-dir data --header-path tests/data/header.txt --extensions .py .yaml --debug
