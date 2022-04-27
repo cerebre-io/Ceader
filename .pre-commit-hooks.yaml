@@ -4,6 +4,5 @@
     description: 'Tool for automatically adding a header to files in the form of a comment'
     entry: ceader
     language: python
-    'types_or': [python, pyi]
-    args: ["--mode",'--files-dir','--header-path','--extensions','--skip-hidden','--debug']
+    args: ["--mode",'--header-path','--extensions','--skip-hidden','--debug','--files']
     require_serial: true

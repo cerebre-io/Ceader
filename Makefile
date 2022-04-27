@@ -13,7 +13,7 @@ EXTENSIONS = .py .yaml
 # first arg is mode
 define run_ceader
 		${PYTHON} -m ${MODULE} --mode $(1)  \
-		--files-dir ${FILES_DIR} --header-path ${HEADER_PATH} \
+		--files ${FILES_DIR} --header-path ${HEADER_PATH} \
 		--extensions ${EXTENSIONS} \
 		--debug
 endef
