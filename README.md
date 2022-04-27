@@ -38,6 +38,8 @@ print("Hello world!")
 print("Hello world!")
 ```
 
+If the header already exists, in the same form as in the given ```${HEADER_PATH}``` file, the header will not be added a second time.
+
 ### Installation
 From [PyPi](https://pypi.org/project/ceader/)
 ```
@@ -51,7 +53,7 @@ ceader --mode add_header --files ${FILES} --header-path ${HEADER_PATH} --extensi
 ### Pre-commit plugin
 In order to use ceader in pre-commit, the following two configs are recommended:
 - always run on the specified files.
-- run at certain stages (by default ```stages: all stages```, check pre-commit [documentation](https://pre-commit.com/)).
+- run at certain stages (by default repo ceader use ```stages: all stages```, check pre-commit [documentation](https://pre-commit.com/)).
 
 ##### Always run
 
@@ -122,4 +124,5 @@ There are two modes at the moment:\
 ### TODO
 
 - user validation (e.g: lint)
-- files backup
+- files backup - pre-commit provides backup but the app itself not
+- change extensions arg to optional - if not used, change all files
