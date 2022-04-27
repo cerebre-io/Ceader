@@ -61,7 +61,7 @@ Add the following configuration to your .pre-commit-config.yaml:
 ```
 repos:
     - repo: https://github.com/cerebre-io/ceader
-        rev: 0.0.5
+        rev: 0.0.6
         hooks:
         - id: ceader
             args:[
@@ -80,7 +80,7 @@ Add the following configuration to your .pre-commit-config.yaml:
 ```
 repos:
     - repo: https://github.com/cerebre-io/ceader
-        rev: 0.0.5
+        rev: 0.0.6
         hooks:
         - id: ceader
             args:[
