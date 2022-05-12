@@ -1,7 +1,7 @@
 files: ""
 repos:
 -   repo: .
-    rev: ef892870ac21c82930cb8c5f99b78f9f2f312504
+    rev: 0ca2bb6c8eacc4b07127284d5db2f753017b34c6
     hooks:
     -   id: ceader
         args: [

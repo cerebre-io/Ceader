@@ -218,6 +218,52 @@ def test_cli_add_and_remove_header_to_file() -> None:
             file_1.close()
 
 
+def test_compare_lines_with_different_comments() -> None:
+
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        file_1 = tempfile.NamedTemporaryFile(suffix=".py", dir=tmpdirname)
+        file_2 = tempfile.NamedTemporaryFile(suffix=".py", dir=tmpdirname)
+        assert (len(get_file_lines(Path(file_1.name)))) == 0
+        assert (len(get_file_lines(Path(file_2.name)))) == 0
+
+        sys.argv = [
+            "--foo",  # to make sure that test works. We ignore first argv using MakeFile
+            "--mode",
+            "add_header",
+            "--files",
+            str(file_1.name),
+            "--header-path",
+            str(TEST_HEADER_PATH.resolve()),
+            "--extensions",
+            ".py",
+            "--debug",
+        ]
+        run_cli()
+        file_1_len = len(get_file_lines(Path(file_1.name)))
+        assert (file_1_len) > 0
+        file_1.close()
+
+        sys.argv = [
+            "--foo",  # to make sure that test works. We ignore first argv using MakeFile
+            "--mode",
+            "add_header",
+            "--files",
+            str(file_2.name),
+            "--header-path",
+            str(TEST_HEADER_PATH.resolve()),
+            "--extensions",
+            ".py",
+            "--debug",
+            "--prefer-multiline-comment",
+        ]
+        run_cli()
+        file_2_len = len(get_file_lines(Path(file_2.name)))
+        assert (file_2_len) > 0
+        file_2.close()
+
+        assert file_2_len > file_1_len
+
+
 # def test_cli_get_print_python() -> None:
 
 #     with tempfile.TemporaryDirectory() as tmpdirname:

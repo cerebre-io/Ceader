@@ -47,7 +47,7 @@ pip install ceader
 ```
 ### Exemplary cli usage
 ```
-ceader --mode add_header --files ${FILES} --header-path ${HEADER_PATH} --extensions ${EXTENSIONS} --debug --skip-hidden
+ceader --mode add_header --files ${FILES} --header-path ${HEADER_PATH} --extensions ${EXTENSIONS}  --prefer-multiline-comment --debug --skip-hidden
 ```
 
 ### Pre-commit plugin
@@ -107,6 +107,12 @@ Supported extensions and languages can be found [here](https://github.com/cerebr
 
 ###### DEBUG
 An optional boolean value that allows checking the status of adding headers.
+If you are using precommit, ```verbose: true``` must be provided in config.
+
+###### PREFER_MULTILINE_COMMENT
+Some languages ​​support block comments and also single comments and some of them only one type of comment.\
+By default ceader will use try to use single comment if possible. If this is not possible it will use block comment. \
+Use ```--prefer-multiline-comment``` if you want to reverse logic.
 
 ###### SKIP_HIDDEN
 An optional boolean that allows you to ignore hidden files, even if they meet the extension condition.

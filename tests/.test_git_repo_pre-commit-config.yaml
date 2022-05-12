@@ -11,7 +11,8 @@ repos:
                 '--extensions', '.py',
                 '--debug',
                 '--skip-hidden',
-                '--files',
+                '--files', #main.py
+
                 ]
 
 

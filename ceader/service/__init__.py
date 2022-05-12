@@ -10,6 +10,7 @@ def new_application(
     header_path: Path,
     file_extensions: List[str],
     skip_hidden: bool,
+    prefer_multiline_comment: bool,
     debug: bool,
 ) -> Application:
     file_repo = FileDiskRepository(
@@ -21,5 +22,6 @@ def new_application(
     )
     return Application(
         file_repo=file_repo,
+        prefer_multiline_comment=prefer_multiline_comment,
         debug=debug,
     )

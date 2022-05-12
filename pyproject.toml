@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ceader"
-version = "0.0.4"
+version = "0.0.7"
 description = "Header adding service"
 authors = [
     "Kamil Jankowski <kamil@cerebre.io>",

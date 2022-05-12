@@ -39,6 +39,7 @@ class Cli:
             header_path=Path(parsed_args.header_path),
             file_extensions=parsed_args.extensions,
             skip_hidden=parsed_args.skip_hidden,
+            prefer_multiline_comment=parsed_args.prefer_multiline_comment,
             debug=parsed_args.debug,
         )
 
@@ -112,6 +113,13 @@ class Cli:
             help=("file extensions which ll be changed by ceader."),
             default=[],
             required=True,
+        )
+
+        parser.add_argument(
+            "--prefer-multiline-comment",
+            help=("Some languages support multiline and single line comments"),
+            action="store_true",
+            default=False,
         )
 
         parser.add_argument(

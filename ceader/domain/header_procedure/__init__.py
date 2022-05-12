@@ -22,7 +22,11 @@ class HeaderProcedure:
         pass
 
     def add_header(
-        self, filepath: Path, header_path: Path, debug: bool
+        self,
+        filepath: Path,
+        header_path: Path,
+        prefer_multiline_comment: bool,
+        debug: bool,
     ) -> CeaderStatus:
         cl = _understand_computer_language(filepath, debug)
         if cl is None:
@@ -31,7 +35,9 @@ class HeaderProcedure:
         cm_data = _get_comment_data(cl)
 
         header_lines = self._create_header_lines(
-            header_path=header_path, comment_data=cm_data
+            header_path=header_path,
+            comment_data=cm_data,
+            prefer_multiline_comment=prefer_multiline_comment,
         )
 
         if len(header_lines) == 0:
@@ -50,7 +56,11 @@ class HeaderProcedure:
         return CeaderStatus.SUCCESS
 
     def remove_header(
-        self, filepath: Path, header_path: Path, debug: bool
+        self,
+        filepath: Path,
+        header_path: Path,
+        prefer_multiline_comment: bool,
+        debug: bool,
     ) -> CeaderStatus:
         cl = _understand_computer_language(filepath, debug)
         if cl is None:
@@ -59,7 +69,9 @@ class HeaderProcedure:
         cm_data = _get_comment_data(cl)
 
         header_lines = self._create_header_lines(
-            header_path=header_path, comment_data=cm_data
+            header_path=header_path,
+            comment_data=cm_data,
+            prefer_multiline_comment=prefer_multiline_comment,
         )
 
         if len(header_lines) == 0:
@@ -81,7 +93,10 @@ class HeaderProcedure:
         print()
 
     def _create_header_lines(
-        self, header_path: Path, comment_data: CommentData
+        self,
+        header_path: Path,
+        comment_data: CommentData,
+        prefer_multiline_comment: bool,
     ) -> List[str]:
         """
         Reading header file + adding comments
@@ -106,17 +121,36 @@ class HeaderProcedure:
             )
 
         header_lines = get_header_lines(header_path)
-        if comment_data.single_line_comment is not None:
-            ceader_lines = use_single_line_comment_method(
-                single_line_comment=comment_data.single_line_comment, lines=header_lines
-            )
-        elif comment_data.multi_line_comment is not None:
-            ceader_lines = use_multi_line_comment_method(
-                multi_line_comment=comment_data.multi_line_comment, lines=header_lines
-            )
+        if not prefer_multiline_comment:
+            if comment_data.single_line_comment is not None:
+                ceader_lines = use_single_line_comment_method(
+                    single_line_comment=comment_data.single_line_comment,
+                    lines=header_lines,
+                )
+            elif comment_data.multi_line_comment is not None:
+                ceader_lines = use_multi_line_comment_method(
+                    multi_line_comment=comment_data.multi_line_comment,
+                    lines=header_lines,
+                )
+            else:
+                raise ValueError("Something wrong with CommentData")
+            return ceader_lines
+
         else:
-            raise ValueError("Something wrong with CommentData")
-        return ceader_lines
+
+            if comment_data.multi_line_comment is not None:
+                ceader_lines = use_multi_line_comment_method(
+                    multi_line_comment=comment_data.multi_line_comment,
+                    lines=header_lines,
+                )
+            elif comment_data.single_line_comment is not None:
+                ceader_lines = use_single_line_comment_method(
+                    single_line_comment=comment_data.single_line_comment,
+                    lines=header_lines,
+                )
+            else:
+                raise ValueError("Something wrong with CommentData")
+            return ceader_lines
 
     def _add_header_to_file(self, filepath: Path, lines_to_add: List[str]) -> None:
         """Insert given lines as a new lines at the beginning of a file"""

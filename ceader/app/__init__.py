@@ -22,9 +22,11 @@ class Application:
     def __init__(
         self,
         file_repo: FileRepository,
+        prefer_multiline_comment: bool,
         debug: bool = False,
     ) -> None:
         self.file_repo = file_repo
+        self.prefer_multiline_comment = prefer_multiline_comment
         self.debug = debug
 
         # TODO add postinit fun
@@ -34,7 +36,12 @@ class Application:
         _validate_header_lines(get_file_lines(header))
 
     def add_header_to_file(self, filepath: Path, header_path: Path) -> CeaderStatus:
-        return _add_header_to_file(filepath, header_path, debug=self.debug)
+        return _add_header_to_file(
+            filepath,
+            header_path,
+            prefer_multiline_comment=self.prefer_multiline_comment,
+            debug=self.debug,
+        )
 
     def add_header_to_files(
         self, files_to_change: List[Path], header_path: Path
@@ -60,7 +67,12 @@ class Application:
     def remove_header_from_file(
         self, filepath: Path, header_path: Path
     ) -> CeaderStatus:
-        return _remove_header_from_file(filepath, header_path, debug=self.debug)
+        return _remove_header_from_file(
+            filepath,
+            header_path,
+            prefer_multiline_comment=self.prefer_multiline_comment,
+            debug=self.debug,
+        )
 
     def remove_header_from_files(
         self, files_to_change: List[Path], header_path: Path
@@ -83,22 +95,34 @@ class Application:
 
 
 def _remove_header_from_file(
-    filepath: Path, header_path: Path, debug: bool = False
+    filepath: Path,
+    header_path: Path,
+    prefer_multiline_comment: bool = False,
+    debug: bool = False,
 ) -> CeaderStatus:
     header_procedure = HeaderProcedure()
 
     return header_procedure.remove_header(
-        filepath=filepath, header_path=header_path, debug=debug
+        filepath=filepath,
+        header_path=header_path,
+        prefer_multiline_comment=prefer_multiline_comment,
+        debug=debug,
     )
 
 
 def _add_header_to_file(
-    filepath: Path, header_path: Path, debug: bool = False
+    filepath: Path,
+    header_path: Path,
+    prefer_multiline_comment: bool = False,
+    debug: bool = False,
 ) -> CeaderStatus:
     header_procedure = HeaderProcedure()
 
     return header_procedure.add_header(
-        filepath=filepath, header_path=header_path, debug=debug
+        filepath=filepath,
+        header_path=header_path,
+        prefer_multiline_comment=prefer_multiline_comment,
+        debug=debug,
     )
 
 
