@@ -21,7 +21,7 @@ jobs:
       uses: schneegans/dynamic-badges-action@v1.1.0
       with:
         auth: ${{ secrets.GIST_SECRET }}
-        gistID: coverage_badges
+        gistID: 971192b05a36c2bbdfa5c20a0377a419
         filename: ceader_coverage.json
         label: coverage
         message: ${{ env.COVERAGE }}

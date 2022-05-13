@@ -1,4 +1,4 @@
-[![Coverage Badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/KamilJankowski/Coverage Badges/raw/ceader__heads_main.json)]
+[![Coverage Badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/KamilJankowski/971192b05a36c2bbdfa5c20a0377a419/raw/ceader__heads_main.json)]
 
 # Ceader
 
