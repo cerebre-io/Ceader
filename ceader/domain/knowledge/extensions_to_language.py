@@ -5,7 +5,9 @@ from ceader.domain.types.enums import ComputerLanguage
 # https://gist.github.com/ppisarczyk/43962d06686722d26d176fad46879d41
 
 
-COMPUTER_LANGUAGE_TO_EXTENSION_MAPPING: Dict[ComputerLanguage, Tuple[str, ...]] = {
+COMPUTER_LANGUAGE_TO_EXTENSION_MAPPING: Dict[
+    ComputerLanguage, Tuple[str, ...]
+] = {
     ComputerLanguage.C: tuple(
         [
             ".c",
@@ -217,5 +219,7 @@ COMPUTER_LANGUAGE_TO_EXTENSION_MAPPING: Dict[ComputerLanguage, Tuple[str, ...]] 
 }
 
 EXTENSION_TO_PROGRAMMING_LANGUAGE_MAPPING: Dict[str, ComputerLanguage] = {
-    k: cl for cl, vs in COMPUTER_LANGUAGE_TO_EXTENSION_MAPPING.items() for k in vs
+    k: cl
+    for cl, vs in COMPUTER_LANGUAGE_TO_EXTENSION_MAPPING.items()
+    for k in vs
 }

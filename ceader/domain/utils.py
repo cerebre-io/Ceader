@@ -1,8 +1,10 @@
 import collections
+import os
 from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, List, TypeVar
 
 T = TypeVar("T")
+import shutil
 
 
 def find_file(
@@ -64,3 +66,25 @@ def get_file_lines(file_path: Path, close_file: bool = True) -> List[str]:
         file.close()
 
     return file_lines
+
+
+def get_permissions_mask_str(file_path: Path) -> str:
+    return get_permissions_mask_oct(file_path)[-3:]
+
+
+def get_permissions_mask_oct(file_path: Path) -> str:
+    return oct(os.stat(file_path).st_mode)
+
+
+def copy_permissions(target: Path, source: Path) -> None:
+    # st = os.stat(source)
+    # os.chown(target, st.st_uid, st.st_gid)
+    # os.chmod(target, st.st_mode)
+    shutil.copymode(src=source, dst=target)
+
+
+def change_permissions(filepath: Path, mode: int) -> None:
+    umask = os.umask(mode)
+    os.umask(umask)
+
+    os.chmod(filepath, mode & ~umask)

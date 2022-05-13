@@ -23,7 +23,9 @@ class FileDiskRepository(FileRepository):
                 raise ValueError(f"{path} is not a file!")
 
         if len(extensions_to_get) == 0:
-            raise ValueError(f"{extensions_to_get} extensions list cannot be empty!")
+            raise ValueError(
+                f"{extensions_to_get} extensions list cannot be empty!"
+            )
 
         self.skip_hidden = skip_hidden
         self.files = files

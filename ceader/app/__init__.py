@@ -7,7 +7,12 @@ from pathlib import Path
 from typing import Callable, Dict, Iterable, Iterator, List, TypeVar
 
 from ceader import get_logger
-from ceader.domain.header_procedure import HeaderProcedure
+from ceader.domain.header_procedure.add_header_procedure import (
+    AddHeaderProcedure,
+)
+from ceader.domain.header_procedure.remove_header_procedure import (
+    RemoveHeaderProcedure,
+)
 from ceader.domain.repositories import FileRepository
 from ceader.domain.types.enums import CeaderStatus
 from ceader.domain.utils import get_file_lines
@@ -35,7 +40,9 @@ class Application:
             raise ValueError("Cannot find header!")
         _validate_header_lines(get_file_lines(header))
 
-    def add_header_to_file(self, filepath: Path, header_path: Path) -> CeaderStatus:
+    def add_header_to_file(
+        self, filepath: Path, header_path: Path
+    ) -> CeaderStatus:
         return _add_header_to_file(
             filepath,
             header_path,
@@ -100,9 +107,9 @@ def _remove_header_from_file(
     prefer_multiline_comment: bool = False,
     debug: bool = False,
 ) -> CeaderStatus:
-    header_procedure = HeaderProcedure()
+    header_procedure = RemoveHeaderProcedure()
 
-    return header_procedure.remove_header(
+    return header_procedure.run(
         filepath=filepath,
         header_path=header_path,
         prefer_multiline_comment=prefer_multiline_comment,
@@ -116,9 +123,9 @@ def _add_header_to_file(
     prefer_multiline_comment: bool = False,
     debug: bool = False,
 ) -> CeaderStatus:
-    header_procedure = HeaderProcedure()
+    header_procedure = AddHeaderProcedure()
 
-    return header_procedure.add_header(
+    return header_procedure.run(
         filepath=filepath,
         header_path=header_path,
         prefer_multiline_comment=prefer_multiline_comment,

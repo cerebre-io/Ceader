@@ -6,9 +6,14 @@ from pathlib import Path
 import pytest
 
 from ceader.__main__ import run_cli
-from ceader.domain.knowledge.extensions_to_language import \
-    EXTENSION_TO_PROGRAMMING_LANGUAGE_MAPPING
-from ceader.domain.utils import get_file_lines
+from ceader.domain.knowledge.extensions_to_language import (
+    EXTENSION_TO_PROGRAMMING_LANGUAGE_MAPPING,
+)
+from ceader.domain.utils import (
+    change_permissions,
+    get_file_lines,
+    get_permissions_mask_str,
+)
 from tests import TEST_HEADER_PATH
 
 
@@ -180,44 +185,6 @@ def test_cli_add_and_remove_header_all_ext() -> None:
             file_1.close()
 
 
-def test_cli_add_and_remove_header_to_file() -> None:
-    for ext in EXTENSION_TO_PROGRAMMING_LANGUAGE_MAPPING.keys():
-        with tempfile.TemporaryDirectory() as tmpdirname:
-            file_1 = tempfile.NamedTemporaryFile(suffix=ext, dir=tmpdirname)
-            assert (len(get_file_lines(Path(file_1.name)))) == 0
-
-            sys.argv = [
-                "--foo",  # to make sure that test works. We ignore first argv using MakeFile
-                "--mode",
-                "add_header",
-                "--files",
-                str(file_1.name),
-                "--header-path",
-                str(TEST_HEADER_PATH.resolve()),
-                "--extensions",
-                f"{ext}",
-                "--debug",
-            ]
-            run_cli()
-            assert (len(get_file_lines(Path(file_1.name)))) > 0
-
-            sys.argv = [
-                "--foo",  # to make sure that test works. We ignore first argv using MakeFile
-                "--mode",
-                "remove_header",
-                "--files",
-                str(file_1.name),
-                "--header-path",
-                str(TEST_HEADER_PATH.resolve()),
-                "--extensions",
-                f"{ext}",
-                "--debug",
-            ]
-            run_cli()
-            assert (len(get_file_lines(Path(file_1.name)))) == 0
-            file_1.close()
-
-
 def test_compare_lines_with_different_comments() -> None:
 
     with tempfile.TemporaryDirectory() as tmpdirname:
@@ -298,3 +265,90 @@ def test_compare_lines_with_different_comments() -> None:
 #         assert False
 
 # python -m pytest tests/component/test_cli.py
+
+
+def test_cli_add_header_to_file_and_keep_permissions() -> None:
+
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        file_1 = tempfile.NamedTemporaryFile(suffix=".py", dir=tmpdirname)
+        file_1_per_str = get_permissions_mask_str(Path(file_1.name))
+        assert int(file_1_per_str) == 600
+        assert (len(get_file_lines(Path(file_1.name)))) == 0
+
+        change_permissions(Path(file_1.name), 0o644)
+        file_1_per_ch = get_permissions_mask_str(Path(file_1.name))
+        assert int(file_1_per_ch) == 644
+
+        sys.argv = [
+            "--foo",  # to make sure that test works. We ignore first argv using MakeFile
+            "--mode",
+            "add_header",
+            "--files",
+            str(file_1.name),
+            "--header-path",
+            str(TEST_HEADER_PATH.resolve()),
+            "--extensions",
+            ".py",
+            "--debug",
+        ]
+        run_cli()
+        file_1_per_after_cli = get_permissions_mask_str(Path(file_1.name))
+        assert int(file_1_per_after_cli) == 644
+        assert (len(get_file_lines(Path(file_1.name)))) > 0
+
+        file_1.close()
+
+
+def test_cli_add_remove_header_to_file_and_check_permissions() -> None:
+    for ext in EXTENSION_TO_PROGRAMMING_LANGUAGE_MAPPING.keys():
+        with tempfile.TemporaryDirectory() as tmpdirname:
+            file_1 = tempfile.NamedTemporaryFile(suffix=ext, dir=tmpdirname)
+            assert (len(get_file_lines(Path(file_1.name)))) == 0
+
+            file_1_per_str = get_permissions_mask_str(Path(file_1.name))
+            assert int(file_1_per_str) == 600
+            assert (len(get_file_lines(Path(file_1.name)))) == 0
+
+            change_permissions(Path(file_1.name), 0o644)
+            file_1_per_ch = get_permissions_mask_str(Path(file_1.name))
+            assert int(file_1_per_ch) == 644
+
+            sys.argv = [
+                "--foo",  # to make sure that test works. We ignore first argv using MakeFile
+                "--mode",
+                "add_header",
+                "--files",
+                str(file_1.name),
+                "--header-path",
+                str(TEST_HEADER_PATH.resolve()),
+                "--extensions",
+                f"{ext}",
+                "--debug",
+            ]
+            run_cli()
+            assert (len(get_file_lines(Path(file_1.name)))) > 0
+
+            file_1_per_after_add_cli = get_permissions_mask_str(
+                Path(file_1.name)
+            )
+            assert int(file_1_per_after_add_cli) == 644
+
+            sys.argv = [
+                "--foo",  # to make sure that test works. We ignore first argv using MakeFile
+                "--mode",
+                "remove_header",
+                "--files",
+                str(file_1.name),
+                "--header-path",
+                str(TEST_HEADER_PATH.resolve()),
+                "--extensions",
+                f"{ext}",
+                "--debug",
+            ]
+            run_cli()
+            file_1_per_after_remove_cli = get_permissions_mask_str(
+                Path(file_1.name)
+            )
+            assert int(file_1_per_after_remove_cli) == 644
+            assert (len(get_file_lines(Path(file_1.name)))) == 0
+            file_1.close()
