@@ -1,3 +1,6 @@
+![coverage badge](./badges/coverage.svg) [![CI](https://github.com/cerebre-io/ceader/actions/workflows/CI.yaml/badge.svg)](https://github.com/cerebre-io/ceader/actions/workflows/CI.yaml) [![PyPI version](https://badge.fury.io/py/ceader.svg)](https://badge.fury.io/py/ceader)
+
+<!-- ![Your Repository's Stats](https://github-readme-stats.vercel.app/api?username=JankowskiKamil&show_icons=true) -->
 # Ceader
 
 Tool for automatically adding a header to files in the form of a comment.\

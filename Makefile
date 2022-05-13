@@ -41,6 +41,8 @@ clean:
 	@find . -type f -name "*.pyc" -delete
 	@rm -f poetry.lock
 
+
+
 lint: poetry.lock
 	@${PYTHON} -m black ${LIBS}
 	@${PYTHON} -m autoflake --in-place --recursive --remove-all-unused-imports --expand-star-imports ${LIBS}
@@ -48,6 +50,18 @@ lint: poetry.lock
 	@${PYTHON} -m mypy ${LIBS}
 	@${PYTHON} -m bandit --configfile .bandit.yaml --recursive ${LIBS}
 
+test: poetry.lock
+	@${PYTHON} -m coverage run -m pytest tests
+
+coverage: test
+	@${PYTHON} -m coverage report
+
+badges: coverage
+	@rm -r badges
+	@mkdir badges
+	@coverage-badge -f -o coverage.svg
+	@mv coverage.svg ./badges/coverage.svg
+	@rm -f .coverage
 
 add_header: poetry.lock
 	@$(call run_ceader, add_header)
