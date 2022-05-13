@@ -53,8 +53,8 @@ repos:
 
       - id: script
         entry: sh -c
-        name: coverage-ceader
+        name: badges-ceader
         args:
-          - make coverage
+          - make badges
         language: system
         pass_filenames: false

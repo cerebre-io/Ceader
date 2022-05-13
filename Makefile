@@ -51,11 +51,17 @@ lint: poetry.lock
 	@${PYTHON} -m bandit --configfile .bandit.yaml --recursive ${LIBS}
 
 test: poetry.lock
-	@${PYTHON} -m pytest tests
+	@${PYTHON} -m coverage run -m pytest tests
 
 coverage: test
 	@${PYTHON} -m coverage report
 
+badges: coverage
+	@rm -r badges
+	@mkdir badges
+	@coverage-badge -f -o coverage.svg
+	@mv coverage.svg ./badges/coverage.svg
+	@rm -f .coverage
 
 add_header: poetry.lock
 	@$(call run_ceader, add_header)
