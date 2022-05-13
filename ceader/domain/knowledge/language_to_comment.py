@@ -12,7 +12,9 @@ class CommentData:
     multi_line_comment: Optional[Tuple[str, str]]
 
 
-COMPUTER_LANGUAGE_TO_COMMENT_DATA_MAPPING: Dict[ComputerLanguage, CommentData] = {
+COMPUTER_LANGUAGE_TO_COMMENT_DATA_MAPPING: Dict[
+    ComputerLanguage, CommentData
+] = {
     ComputerLanguage.C: CommentData("//", ("/*", "*/")),
     ComputerLanguage.COBOL: CommentData("*", None),
     ComputerLanguage.CPP: CommentData("//", ("/*", "*/")),

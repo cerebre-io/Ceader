@@ -151,7 +151,9 @@ def test_file_in_subfolder() -> None:
 
         file_1 = tempfile.NamedTemporaryFile(suffix=".py", dir=subfolder_path)
         repo = FileDiskRepository(
-            files=[path], header_path=TEST_HEADER_PATH, extensions_to_get=[".py"]
+            files=[path],
+            header_path=TEST_HEADER_PATH,
+            extensions_to_get=[".py"],
         )
 
         files = repo.get_files()

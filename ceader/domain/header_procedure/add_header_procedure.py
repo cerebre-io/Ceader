@@ -51,7 +51,9 @@ class AddHeaderProcedure(HeaderProcedure):
 
         return CeaderStatus.SUCCESS
 
-    def _add_header_to_file(self, filepath: Path, lines_to_add: List[str]) -> None:
+    def _add_header_to_file(
+        self, filepath: Path, lines_to_add: List[str]
+    ) -> None:
         """Insert given lines as a new lines at the beginning of a file"""
         # TODO
 
@@ -60,7 +62,9 @@ class AddHeaderProcedure(HeaderProcedure):
         # open original file in read mode and dummy file in write mode
 
         # TODO move to fun add_to_stringIO(StringIO, lines_to_add)
-        with open(filepath, "r") as read_obj, open(dummy_file, "w") as write_obj:
+        with open(filepath, "r") as read_obj, open(
+            dummy_file, "w"
+        ) as write_obj:
             # Write given line to the dummy file
 
             for line in lines_to_add:

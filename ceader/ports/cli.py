@@ -59,7 +59,9 @@ class Cli:
 
         return run_fun(files_to_change, header_file)
 
-    def add_header_flow(self, files_to_change: List[Path], header_path: Path) -> int:
+    def add_header_flow(
+        self, files_to_change: List[Path], header_path: Path
+    ) -> int:
 
         return self.app.add_header_to_files(
             files_to_change=files_to_change, header_path=header_path
@@ -68,7 +70,9 @@ class Cli:
         # if not success:
         #     raise ValueError(f"failed to add header to files, see previous logs")
 
-    def remove_header_flow(self, files_to_change: List[Path], header_path: Path) -> int:
+    def remove_header_flow(
+        self, files_to_change: List[Path], header_path: Path
+    ) -> int:
 
         return self.app.remove_header_from_files(
             files_to_change=files_to_change, header_path=header_path

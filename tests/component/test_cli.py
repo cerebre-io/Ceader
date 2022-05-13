@@ -6,10 +6,14 @@ from pathlib import Path
 import pytest
 
 from ceader.__main__ import run_cli
-from ceader.domain.knowledge.extensions_to_language import \
-    EXTENSION_TO_PROGRAMMING_LANGUAGE_MAPPING
-from ceader.domain.utils import (change_permissions, get_file_lines,
-                                 get_permissions_mask_str)
+from ceader.domain.knowledge.extensions_to_language import (
+    EXTENSION_TO_PROGRAMMING_LANGUAGE_MAPPING,
+)
+from ceader.domain.utils import (
+    change_permissions,
+    get_file_lines,
+    get_permissions_mask_str,
+)
 from tests import TEST_HEADER_PATH
 
 
@@ -324,7 +328,9 @@ def test_cli_add_remove_header_to_file_and_check_permissions() -> None:
             run_cli()
             assert (len(get_file_lines(Path(file_1.name)))) > 0
 
-            file_1_per_after_add_cli = get_permissions_mask_str(Path(file_1.name))
+            file_1_per_after_add_cli = get_permissions_mask_str(
+                Path(file_1.name)
+            )
             assert int(file_1_per_after_add_cli) == 644
 
             sys.argv = [
@@ -340,7 +346,9 @@ def test_cli_add_remove_header_to_file_and_check_permissions() -> None:
                 "--debug",
             ]
             run_cli()
-            file_1_per_after_remove_cli = get_permissions_mask_str(Path(file_1.name))
+            file_1_per_after_remove_cli = get_permissions_mask_str(
+                Path(file_1.name)
+            )
             assert int(file_1_per_after_remove_cli) == 644
             assert (len(get_file_lines(Path(file_1.name)))) == 0
             file_1.close()

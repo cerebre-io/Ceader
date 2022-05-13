@@ -7,10 +7,12 @@ from pathlib import Path
 from typing import Callable, Dict, Iterable, Iterator, List, TypeVar
 
 from ceader import get_logger
-from ceader.domain.header_procedure.add_header_procedure import \
-    AddHeaderProcedure
-from ceader.domain.header_procedure.remove_header_procedure import \
-    RemoveHeaderProcedure
+from ceader.domain.header_procedure.add_header_procedure import (
+    AddHeaderProcedure,
+)
+from ceader.domain.header_procedure.remove_header_procedure import (
+    RemoveHeaderProcedure,
+)
 from ceader.domain.repositories import FileRepository
 from ceader.domain.types.enums import CeaderStatus
 from ceader.domain.utils import get_file_lines
@@ -38,7 +40,9 @@ class Application:
             raise ValueError("Cannot find header!")
         _validate_header_lines(get_file_lines(header))
 
-    def add_header_to_file(self, filepath: Path, header_path: Path) -> CeaderStatus:
+    def add_header_to_file(
+        self, filepath: Path, header_path: Path
+    ) -> CeaderStatus:
         return _add_header_to_file(
             filepath,
             header_path,

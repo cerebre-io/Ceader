@@ -3,8 +3,11 @@
 import tempfile
 from pathlib import Path
 
-from ceader.domain.utils import (change_permissions, copy_permissions,
-                                 get_permissions_mask_str)
+from ceader.domain.utils import (
+    change_permissions,
+    copy_permissions,
+    get_permissions_mask_str,
+)
 
 
 def test_copy_permissions() -> None:

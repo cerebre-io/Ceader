@@ -5,10 +5,13 @@ from pathlib import Path
 from typing import List, Optional, Tuple
 
 from ceader import get_logger
-from ceader.domain.knowledge.extensions_to_language import \
-    EXTENSION_TO_PROGRAMMING_LANGUAGE_MAPPING
+from ceader.domain.knowledge.extensions_to_language import (
+    EXTENSION_TO_PROGRAMMING_LANGUAGE_MAPPING,
+)
 from ceader.domain.knowledge.language_to_comment import (
-    COMPUTER_LANGUAGE_TO_COMMENT_DATA_MAPPING, CommentData)
+    COMPUTER_LANGUAGE_TO_COMMENT_DATA_MAPPING,
+    CommentData,
+)
 from ceader.domain.types.enums import CeaderStatus, ComputerLanguage
 from ceader.domain.utils import get_file_lines
 
@@ -60,7 +63,9 @@ class HeaderProcedure(ABC):
             multi_line_comment: Tuple[str, str], lines: List[str]
         ) -> List[str]:
             return (
-                [multi_line_comment[0] + "\n"] + lines + [multi_line_comment[1] + "\n"]
+                [multi_line_comment[0] + "\n"]
+                + lines
+                + [multi_line_comment[1] + "\n"]
             )
 
         header_lines = get_header_lines(header_path)
@@ -123,7 +128,9 @@ class HeaderProcedure(ABC):
             else:
                 if first_line is None:
                     first_line = i
-                if line.replace(" ", "") == header_lines[correct_line_counter].replace(
+                if line.replace(" ", "") == header_lines[
+                    correct_line_counter
+                ].replace(
                     " ", ""
                 ):  # TODO QUICK FIX - Make lint removes/adds spaces sometimes!
                     correct_line_counter += 1
@@ -142,7 +149,9 @@ class HeaderProcedure(ABC):
     ) -> Optional[ComputerLanguage]:
         suffix = filepath.suffix
         try:
-            computer_language = EXTENSION_TO_PROGRAMMING_LANGUAGE_MAPPING[suffix]
+            computer_language = EXTENSION_TO_PROGRAMMING_LANGUAGE_MAPPING[
+                suffix
+            ]
         except:
             if debug:
                 logger.warning(f"{filepath.stem} has unknown suffix! {suffix}")
@@ -150,7 +159,9 @@ class HeaderProcedure(ABC):
 
         return computer_language
 
-    def _get_comment_data(self, computer_language: ComputerLanguage) -> CommentData:
+    def _get_comment_data(
+        self, computer_language: ComputerLanguage
+    ) -> CommentData:
         try:
             cd = COMPUTER_LANGUAGE_TO_COMMENT_DATA_MAPPING[computer_language]
         except:
