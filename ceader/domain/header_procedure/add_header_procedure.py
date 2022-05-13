@@ -55,18 +55,20 @@ class AddHeaderProcedure(HeaderProcedure):
         # TODO
 
         # define name of temporary dummy file
-        dummy_file = filepath.stem + ".bak"
+        dummy_file = Path(filepath.stem + ".bak")
         # open original file in read mode and dummy file in write mode
 
         # TODO move to fun add_to_stringIO(StringIO, lines_to_add)
         with open(filepath, "r") as read_obj, open(dummy_file, "w") as write_obj:
             # Write given line to the dummy file
+            print(os.stat(dummy_file), os.stat(filepath))
+
             for line in lines_to_add:
                 write_obj.write(line)
             # Read lines from original file one by one and append them to the dummy file
             for line in read_obj:
                 write_obj.write(line)
-
+        self._copy_permissions(dummy_file, filepath)
         # remove original file
         os.remove(filepath)
         # Rename dummy file as the original file

@@ -1,3 +1,4 @@
+import os
 import re
 from abc import ABC, abstractmethod
 from pathlib import Path
@@ -158,3 +159,8 @@ class HeaderProcedure(ABC):
             )
 
         return cd
+
+    def _copy_permissions(self, target: Path, source: Path) -> None:
+        st = os.stat(source)
+        os.chown(target, st.st_uid, st.st_gid)
+        os.chmod(target, st.st_mode)
