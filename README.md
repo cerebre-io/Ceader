@@ -1,3 +1,5 @@
+[![Coverage Badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/KamilJankowski/Coverage Badges/raw/ceader__heads_main.json)]
+
 # Ceader
 
 Tool for automatically adding a header to files in the form of a comment.\
