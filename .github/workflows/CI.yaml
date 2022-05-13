@@ -67,6 +67,7 @@ jobs:
         run: |
           source .venv/bin/activate
           poetry run python -m pytest tests/
+          find . -type f -name "*.pyc" -delete
           poetry run python -m coverage report
       #----------------------------------------------
       #              coverage badge
