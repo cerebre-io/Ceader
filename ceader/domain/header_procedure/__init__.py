@@ -1,5 +1,5 @@
-import os
 import re
+import shutil
 from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import List, Optional, Tuple
@@ -161,6 +161,7 @@ class HeaderProcedure(ABC):
         return cd
 
     def _copy_permissions(self, target: Path, source: Path) -> None:
-        st = os.stat(source)
-        os.chown(target, st.st_uid, st.st_gid)
-        os.chmod(target, st.st_mode)
+        # st = os.stat(source)
+        # os.chown(target, st.st_uid, st.st_gid)
+        # os.chmod(target, st.st_mode)
+        shutil.copymode(src=source, dst=target)

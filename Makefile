@@ -5,7 +5,7 @@ PRECOMMIT   = poetry run pre-commit
 
 FILES_DIR = tests/data/fake_files
 HEADER_PATH = tests/data/headers/cerebre_header.txt
-EXTENSIONS = .py .yaml
+EXTENSIONS = .sh
 
 
 .PHONY: clean fmt lint test init shell run-stack down-stack scrape

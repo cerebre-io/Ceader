@@ -1,7 +1,7 @@
 files: ""
 repos:
 -   repo: .
-    rev: 0ca2bb6c8eacc4b07127284d5db2f753017b34c6
+    rev: a79ad23ed3c8a17706621d908801086bb8d878e0
     hooks:
     -   id: ceader
         args: [
@@ -11,9 +11,10 @@ repos:
                 '--extensions', '.py',
                 '--debug',
                 '--skip-hidden',
-                '--files',
+                '--files', 'tests/data/fake_files',
                 ]
-
+        verbose: true
+        pass_filenames: false
 
 # #To reproduce test type:
 # pre-commit try-repo ../ceader
