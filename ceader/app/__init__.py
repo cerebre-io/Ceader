@@ -7,7 +7,13 @@ from pathlib import Path
 from typing import Callable, Dict, Iterable, Iterator, List, TypeVar
 
 from ceader import get_logger
-from ceader.domain.header_procedure import HeaderProcedure
+# fmt: off
+#Black / isort are broken here :)
+from ceader.domain.header_procedure.add_header_procedure import \
+    AddHeaderProcedure
+from ceader.domain.header_procedure.remove_header_procedure import \
+    RemoveHeaderProcedure
+# fmt: on
 from ceader.domain.repositories import FileRepository
 from ceader.domain.types.enums import CeaderStatus
 from ceader.domain.utils import get_file_lines
@@ -100,9 +106,9 @@ def _remove_header_from_file(
     prefer_multiline_comment: bool = False,
     debug: bool = False,
 ) -> CeaderStatus:
-    header_procedure = HeaderProcedure()
+    header_procedure = RemoveHeaderProcedure()
 
-    return header_procedure.remove_header(
+    return header_procedure.run(
         filepath=filepath,
         header_path=header_path,
         prefer_multiline_comment=prefer_multiline_comment,
@@ -116,9 +122,9 @@ def _add_header_to_file(
     prefer_multiline_comment: bool = False,
     debug: bool = False,
 ) -> CeaderStatus:
-    header_procedure = HeaderProcedure()
+    header_procedure = AddHeaderProcedure()
 
-    return header_procedure.add_header(
+    return header_procedure.run(
         filepath=filepath,
         header_path=header_path,
         prefer_multiline_comment=prefer_multiline_comment,
