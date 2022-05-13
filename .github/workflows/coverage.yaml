@@ -1,5 +1,5 @@
 #https://dev.to/thejaredwilcurt/coverage-badge-with-github-actions-finally-59fa
-
+#https://github.com/JankowskiKamil/coverage-badge-py
 name: coverage badge
 
 on: [push]
@@ -36,5 +36,4 @@ jobs:
         with:
           github_token: ${{ secrets.GIT_TOKEN }}
           branch: ${{ github.ref }}
-        logoColor: lightblue
 
