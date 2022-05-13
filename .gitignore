@@ -1,5 +1,4 @@
 # manual
-.coverage
 .vscode/
 .idea/
 .DS_Store
@@ -53,8 +52,6 @@ pip-delete-this-directory.txt
 htmlcov/
 .tox/
 .nox/
-.coverage
-.coverage.*
 .cache
 nosetests.xml
 coverage.xml
