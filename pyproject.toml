@@ -10,6 +10,7 @@ authors = [
 [tool.poetry.dependencies]
 python = ">=3.9,<3.10"
 pytest = "^7.1.1"
+coverage-badge = "^1.1.0"
 
 
 [tool.poetry.dev-dependencies]

@@ -2,36 +2,39 @@
 
 name: coverage badge
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push]
+
 
 jobs:
   checks:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
 
-    - name: Install modules
-      run: yarn --prefer-offline
+      - name: Coverage Badge
+        uses: tj-actions/coverage-badge-py@v1.8
 
-    - name: Run unit tests with coverage
-      run: |
-        SUMMARY="$(yarn test --coverage --coverageReporters=text-summary | tail -3 | head -1)"
-        TOKENS=($SUMMARY)
-        echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
+      - name: Verify Changed files
+        uses: tj-actions/verify-changed-files@v9
+        id: changed_files
+        with:
+          files: coverage.svg
 
-    - name: Create Coverage Badge
-      uses: schneegans/dynamic-badges-action@v1.1.0
-      with:
-        auth: ${{ secrets.GIST_SECRET }}
-        gistID: 971192b05a36c2bbdfa5c20a0377a419
-        filename: ceader__${{ env.BRANCH }}.json
-        label: coverage
-        message: ${{ env.COVERAGE }}
-        namedLogo: jest
-        color: blue
+      - name: Commit files
+        if: steps.changed_files.outputs.files_changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add coverage.svg
+          git commit -m "Updated coverage.svg"
+
+      - name: Push changes
+        if: steps.changed_files.outputs.files_changed == 'true'
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.github_token }}
+          branch: ${{ github.ref }}
         logoColor: lightblue
 
