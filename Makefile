@@ -41,12 +41,20 @@ clean:
 	@find . -type f -name "*.pyc" -delete
 	@rm -f poetry.lock
 
+
+
 lint: poetry.lock
 	@${PYTHON} -m black ${LIBS}
 	@${PYTHON} -m autoflake --in-place --recursive --remove-all-unused-imports --expand-star-imports ${LIBS}
 	@${PYTHON} -m isort ${LIBS}
 	@${PYTHON} -m mypy ${LIBS}
 	@${PYTHON} -m bandit --configfile .bandit.yaml --recursive ${LIBS}
+
+test: poetry.lock
+	@${PYTHON} -m pytest tests
+
+coverage: test
+	@${PYTHON} -m coverage report
 
 
 add_header: poetry.lock

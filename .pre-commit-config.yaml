@@ -50,3 +50,11 @@ repos:
           - make lint
         language: system
         pass_filenames: false
+
+      - id: script
+        entry: sh -c
+        name: coverage-ceader
+        args:
+          - make coverage
+        language: system
+        pass_filenames: false
