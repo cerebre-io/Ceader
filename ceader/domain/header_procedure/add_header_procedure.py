@@ -8,7 +8,7 @@ from ceader import get_logger
 from ceader.domain.header_procedure import HeaderProcedure
 # fmt: on
 from ceader.domain.types.enums import CeaderStatus
-from ceader.domain.utils import copy_permissions, get_permissions_mask_str
+from ceader.domain.utils import copy_permissions
 
 logger = get_logger()
 
@@ -62,18 +62,15 @@ class AddHeaderProcedure(HeaderProcedure):
         # TODO move to fun add_to_stringIO(StringIO, lines_to_add)
         with open(filepath, "r") as read_obj, open(dummy_file, "w") as write_obj:
             # Write given line to the dummy file
-            print(get_permissions_mask_str(dummy_file))
-            print(get_permissions_mask_str(filepath))
-            print()
+
             for line in lines_to_add:
                 write_obj.write(line)
             # Read lines from original file one by one and append them to the dummy file
             for line in read_obj:
                 write_obj.write(line)
+
         copy_permissions(dummy_file, filepath)
-        print(get_permissions_mask_str(dummy_file))
-        print(get_permissions_mask_str(filepath))
-        print()
+
         # remove original file
         os.remove(filepath)
         # Rename dummy file as the original file

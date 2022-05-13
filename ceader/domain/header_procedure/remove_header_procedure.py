@@ -8,6 +8,7 @@ from ceader import get_logger
 from ceader.domain.header_procedure import HeaderProcedure
 # fmt: on
 from ceader.domain.types.enums import CeaderStatus
+from ceader.domain.utils import copy_permissions
 
 logger = get_logger()
 
@@ -61,13 +62,15 @@ class RemoveHeaderProcedure(HeaderProcedure):
         first_line = lines_to_remove[0]
         last_line = lines_to_remove[1]
         # define name of temporary dummy file
-        dummy_file = filepath.stem + ".bak"
+        dummy_file = Path(filepath.stem + ".bak")
         # open original file in read mode and dummy file in write mode
         with open(filepath, "r") as read_obj, open(dummy_file, "w") as write_obj:
             # Read lines from original file one by one and append them to the dummy file
             for i, line in enumerate(read_obj):
                 if not (i >= first_line and i <= last_line):
                     write_obj.write(line)
+
+        copy_permissions(dummy_file, filepath)
         # remove original file
         os.remove(filepath)
         # Rename dummy file as the original file
