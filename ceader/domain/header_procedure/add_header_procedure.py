@@ -62,15 +62,27 @@ class AddHeaderProcedure(HeaderProcedure):
         # open original file in read mode and dummy file in write mode
 
         # TODO move to fun add_to_stringIO(StringIO, lines_to_add)
+
+        shebang_line = self._get_shebang_line(filepath)
+
         with open(filepath, "r") as read_obj, open(
             dummy_file, "w"
         ) as write_obj:
             # Write given line to the dummy file
 
+            if shebang_line is not None:  # shebang must be always first
+
+                write_obj.write(shebang_line)
+
             for line in lines_to_add:
                 write_obj.write(line)
             # Read lines from original file one by one and append them to the dummy file
-            for line in read_obj:
+            for i, line in enumerate(read_obj):
+
+                if (
+                    i == 0 and shebang_line is not None
+                ):  # shebang already added
+                    continue
                 write_obj.write(line)
 
         copy_permissions(dummy_file, filepath)

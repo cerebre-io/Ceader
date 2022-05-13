@@ -108,7 +108,6 @@ def _remove_header_from_file(
     debug: bool = False,
 ) -> CeaderStatus:
     header_procedure = RemoveHeaderProcedure()
-
     return header_procedure.run(
         filepath=filepath,
         header_path=header_path,

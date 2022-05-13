@@ -122,7 +122,10 @@ class HeaderProcedure(ABC):
         correct_line_counter = 0
 
         for i, line in enumerate(file_lines):
-            if first_line is None and re.search("^\s*$", line):
+
+            if first_line is None and (
+                self._is_empty_line(line) or self._is_shebang_line(line)
+            ):
                 # ignoring all blank lines
                 continue
             else:
@@ -143,6 +146,21 @@ class HeaderProcedure(ABC):
                     last_line = i
                     return first_line, last_line
         return None
+
+    def _is_shebang_line(self, line: str) -> bool:
+        return bool(re.search("^[#][!]", line))
+
+    def _is_empty_line(self, line: str) -> bool:
+        return bool(re.search("^\s*$", line))
+
+    def _get_shebang_line(self, filepath: Path) -> Optional[str]:
+        lines = get_file_lines(filepath)
+        if len(lines) == 0:
+            return None
+        elif self._is_shebang_line(lines[0]):
+            return lines[0]
+        else:
+            return None
 
     def _understand_computer_language(
         self, filepath: Path, debug: bool

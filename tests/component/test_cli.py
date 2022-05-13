@@ -1,4 +1,3 @@
-# fmt: off
 import sys
 import tempfile
 from pathlib import Path
@@ -17,12 +16,17 @@ from ceader.domain.utils import (
 from tests import TEST_HEADER_PATH
 
 
-# fmt: on
 def test_cli_add_header() -> None:
 
     with tempfile.TemporaryDirectory() as tmpdirname:
         file_1 = tempfile.NamedTemporaryFile(suffix=".py", dir=tmpdirname)
-        assert (len(get_file_lines(Path(file_1.name)))) == 0
+        file_1.write(b"print('hello world!')\n")
+        file_1.flush()
+        file_1.seek(0)
+        for line in get_file_lines(Path(file_1.name)):
+            print(line.replace("\n", ""))
+
+        assert (len(get_file_lines(Path(file_1.name)))) == 1
 
         sys.argv = [
             "--foo",  # to make sure that test works. We ignore first argv using MakeFile
@@ -37,7 +41,29 @@ def test_cli_add_header() -> None:
             "--debug",
         ]
         run_cli()
-        assert (len(get_file_lines(Path(file_1.name)))) > 0
+        lines_1 = get_file_lines(Path(file_1.name))
+        assert (len(lines_1)) > 0 and lines_1[-1] == "print('hello world!')\n"
+
+        # run twice to make sure nothing happend
+        sys.argv = [
+            "--foo",  # to make sure that test works. We ignore first argv using MakeFile
+            "--mode",
+            "add_header",
+            "--files",
+            str(tmpdirname),
+            "--header-path",
+            str(TEST_HEADER_PATH.resolve()),
+            "--extensions",
+            ".py",
+            "--debug",
+        ]
+        run_cli()
+        lines_2 = get_file_lines(Path(file_1.name))
+        assert (
+            (len(lines_1)) > 0
+            and lines_1[-1] == "print('hello world!')\n"
+            and len(lines_1) == len(lines_2)
+        )
         file_1.close()
 
 
@@ -352,3 +378,54 @@ def test_cli_add_remove_header_to_file_and_check_permissions() -> None:
             assert int(file_1_per_after_remove_cli) == 644
             assert (len(get_file_lines(Path(file_1.name)))) == 0
             file_1.close()
+
+
+def test_cli_shebang() -> None:
+
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        file = tempfile.NamedTemporaryFile(suffix=".sh", dir=tmpdirname)
+        file.write(b"#!/usr/bin/python\n")
+        file.flush()
+        file.seek(0)
+        assert (len(get_file_lines(Path(file.name)))) == 1
+
+        sys.argv = [
+            "--foo",  # to make sure that test works. We ignore first argv using MakeFile
+            "--mode",
+            "add_header",
+            "--files",
+            str(file.name),
+            "--header-path",
+            str(TEST_HEADER_PATH.resolve()),
+            "--extensions",
+            ".sh",
+            "--debug",
+        ]
+        run_cli()
+
+        assert (
+            len(get_file_lines(Path(file.name))) > 1
+            and get_file_lines(Path(file.name))[0] == "#!/usr/bin/python\n"
+        )
+
+        sys.argv = [
+            "--foo",  # to make sure that test works. We ignore first argv using MakeFile
+            "--mode",
+            "remove_header",
+            "--files",
+            str(file.name),
+            "--header-path",
+            str(TEST_HEADER_PATH.resolve()),
+            "--extensions",
+            ".sh",
+            "--debug",
+        ]
+        run_cli()
+        assert (
+            len(get_file_lines(Path(file.name))) == 1
+            and get_file_lines(Path(file.name))[0] == "#!/usr/bin/python\n"
+        )
+        file.close()
+
+
+# python -m pytest tests/component/test_cli.py
