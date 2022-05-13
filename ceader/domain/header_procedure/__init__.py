@@ -3,14 +3,11 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import List, Optional, Tuple
 
-# fmt: off
-#Black / isort are broken here :)
 from ceader import get_logger
 from ceader.domain.knowledge.extensions_to_language import \
     EXTENSION_TO_PROGRAMMING_LANGUAGE_MAPPING
 from ceader.domain.knowledge.language_to_comment import (
     COMPUTER_LANGUAGE_TO_COMMENT_DATA_MAPPING, CommentData)
-# fmt: on
 from ceader.domain.types.enums import CeaderStatus, ComputerLanguage
 from ceader.domain.utils import get_file_lines
 

@@ -7,13 +7,10 @@ from pathlib import Path
 from typing import Callable, Dict, Iterable, Iterator, List, TypeVar
 
 from ceader import get_logger
-# fmt: off
-#Black / isort are broken here :)
 from ceader.domain.header_procedure.add_header_procedure import \
     AddHeaderProcedure
 from ceader.domain.header_procedure.remove_header_procedure import \
     RemoveHeaderProcedure
-# fmt: on
 from ceader.domain.repositories import FileRepository
 from ceader.domain.types.enums import CeaderStatus
 from ceader.domain.utils import get_file_lines
