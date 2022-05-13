@@ -1,4 +1,4 @@
-![coverage badge](./badges/coverage.svg) ![example workflow](https://github.com/github/docs/actions/workflows/CI.yml/badge.svg)
+![coverage badge](./badges/coverage.svg) [![CI](https://github.com/cerebre-io/ceader/actions/workflows/CI.yaml/badge.svg)](https://github.com/cerebre-io/ceader/actions/workflows/CI.yaml)
 
 # Ceader
 
