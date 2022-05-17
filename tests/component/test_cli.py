@@ -67,6 +67,65 @@ def test_cli_add_header() -> None:
         file_1.close()
 
 
+def test_cli_wrong_suffix() -> None:
+
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        file_1 = tempfile.NamedTemporaryFile(suffix=".pyyy", dir=tmpdirname)
+
+        sys.argv = [
+            "--foo",  # to make sure that test works. We ignore first argv using MakeFile
+            "--mode",
+            "add_header",
+            "--files",
+            str(tmpdirname),
+            "--header-path",
+            str(TEST_HEADER_PATH.resolve()),
+            "--extensions",
+            ".pyyy",
+            "--debug",
+        ]
+        code = run_cli()
+        assert code == 1
+        file_1.close()
+
+
+def test_do_nothing() -> None:
+
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        file_1 = tempfile.NamedTemporaryFile(suffix=".md", dir=tmpdirname)
+        file_1.write(b"'''bash\n")
+        file_1.flush()
+        file_1.write(b"$ python -m foo_fun\n")
+        file_1.flush()
+        file_1.write(b"'''")
+        file_1.flush()
+        file_1.seek(0)
+        for line in get_file_lines(Path(file_1.name)):
+            print(line.replace("\n", ""))
+
+        assert (len(get_file_lines(Path(file_1.name)))) == 3
+
+        sys.argv = [
+            "--foo",  # to make sure that test works. We ignore first argv using MakeFile
+            "--mode",
+            "add_header",
+            "--files",
+            str(tmpdirname),
+            "--header-path",
+            str(TEST_HEADER_PATH.resolve()),
+            "--extensions",
+            ".py",
+            "--debug",
+        ]
+        run_cli()
+        lines_1 = get_file_lines(Path(file_1.name))
+        assert (len(lines_1)) == 3
+        assert lines_1[0] == "'''bash\n"
+        assert lines_1[1] == "$ python -m foo_fun\n"
+        assert lines_1[2] == "'''"
+        file_1.close()
+
+
 def test_cli_add_header_to_file() -> None:
 
     with tempfile.TemporaryDirectory() as tmpdirname:
@@ -255,42 +314,6 @@ def test_compare_lines_with_different_comments() -> None:
         file_2.close()
 
         assert file_2_len > file_1_len
-
-
-# def test_cli_get_print_python() -> None:
-
-#     with tempfile.TemporaryDirectory() as tmpdirname:
-#         file = tempfile.NamedTemporaryFile(suffix=".py", dir=tmpdirname)
-#         file.write(b"print('Hello world!')")
-#         file.flush()
-#         file.seek(0)
-#         assert(len(get_file_lines(Path(file.name)))) == 1
-
-
-#         sys.argv = [
-#             "--foo", # to make sure that test works. We ignore first argv using MakeFile
-#             "--mode",
-#             "add_header",
-#             "--files-dir",
-#              str(tmpdirname),
-#             "--header-path",
-#             str(TEST_HEADER_PATH.resolve()),
-# 		    "--extensions",
-#             ".py",
-# 		    "--debug"
-#         ]
-#         run_cli()
-
-#         for line in get_file_lines(Path(file.name)):
-#             print(line.replace("\n",""))
-
-#         print()
-#         #assert(len(get_file_lines(Path(file.name)))) == 0
-#         result = StringIO(initial_value=(str(os.system(f'python {Path(file.name)}'))))
-#         print(result.getvalue(),"HA")
-#         assert False
-
-# python -m pytest tests/component/test_cli.py
 
 
 def test_cli_add_header_to_file_and_keep_permissions() -> None:
