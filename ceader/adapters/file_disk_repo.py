@@ -71,7 +71,7 @@ class FileDiskRepository(FileRepository):
             self.header_path.parent,
             f"{self.header_path.stem}{self.header_path.suffix}",
             relative=False,
-            skip_hidden=self.skip_hidden,
+            skip_hidden=False,
         )
         if len(files) == 0:
             return None

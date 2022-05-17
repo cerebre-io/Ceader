@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 from ceader.adapters.file_disk_repo import FileDiskRepository
-from tests import TEST_HEADER_PATH
+from tests import TEST_HEADER_PATH, TEST_HIDDEN_HEADER_PATH
 
 
 def test_ExtensionsValueError() -> None:
@@ -215,6 +215,19 @@ def test_find_header() -> None:
         repo = FileDiskRepository(
             files=[Path(tmpdirname)],
             header_path=TEST_HEADER_PATH,
+            extensions_to_get=[".py", ".txt"],
+        )
+
+        header = repo.get_header()
+        assert header is not None
+
+
+def test_find_hidden_header() -> None:
+    with tempfile.TemporaryDirectory() as tmpdirname:
+
+        repo = FileDiskRepository(
+            files=[Path(tmpdirname)],
+            header_path=TEST_HIDDEN_HEADER_PATH,
             extensions_to_get=[".py", ".txt"],
         )
 
